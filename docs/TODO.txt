@@ -1,0 +1,190 @@
+* DONE Reviewing: API, BaseImpl, APIClient, BerkleyDBImpl, H2Impl, VoltDBImpl, VoltDBServer, DBTools
+  Skipped for now: BenchmarkTests, JunitTests
+  Skipped for ever: Cassandra* (Will use HBase probably on server)
+  Skipped for ever: LevelDBJavaImpl (The JNI still does not work on Windows, and the Java impl still badly tested and has no benchmark)
+
+* The source code of the VoltDB API is not linked, so that I cannot check how it works,
+  while reviewing the code.
+
+* For the next API, we should use stored procedures for all SQL databases.
+  Firstly, VoltDB only support that mode of access, secondly, stored procedures
+  are usually faster, thirdly, like that, all implementation based on SQL will be similar.
+
+* I have found several/most iterator impl were wrong, or "unsafe". This means two things:
+  Firstly, you have to spend more time thinking about what could go wrong with iterators.
+  Luckily, it's always the same things that can go wrong.
+  Secondly, the tests should have found those mistakes, but did not.
+  This means that we don't test iterators enough, either.
+  Finally, you can't just use the method that returns a whole row data, when
+  you only want the columns. The total data might be a 1000 times more then the
+  columns only, so it would be very inefficient to do that.
+
+* When using "fluent interfaces", you have to return "this" from the setter,
+  so that the setter calls can be chained.
+
+* We need to do some exception handling cleanup. The "rule" should be that exceptions
+  are never just swallowed. If they are ignored, then they must at least be logged.
+  Therefore, if we know that all exceptions will be logged eventually, where they are caught,
+  we also know that it is pointless to log a caught exception, if it is going to be wrapped
+  and re-thrown, because we know that the wrapping exception itself will be logged. It only
+  makes sense to log in that case, if the log entry contains contextual info, which is not
+  part of the caught exception, or the wrapping exception. This might be the case when
+  passing a server exception to the client. Usually, in that case, you don't want to
+  give price to the internals of the server, in particular if it is closed-source.
+
+* When exception are explicitly thrown, they should always try to give as much info as
+  possible. If you are going to throw a "Database already exists" Exception, you should
+  at least specify the database name, and if possible the backend too, for example. We
+  have to assume that many of those exception are going to come, sooner or later. And
+  when that happens, we don't want to have to create a quick code patch and hotfix the
+  production system, just to get basic debug info about the problem.
+
+* You had the number of row IDs hard coded. This brought
+  me to the thought that we in fact have to benchmark several things:
+  a) how the value size affects the result, b) how the number of rows affect the
+  result, and c) how the number of columns affects the result. You can use the
+  smallest size for b) and c) - I think later we discussed that the only benchmark that
+  really should mean anything to us is one that *exactly* simulate the application, hence
+  We decided that we will revisit the benchmark use cases later once we know exactly what
+  type of database calls are important to us.
+
+* Once you have it all done and working, try to find out how to produce two benchmark
+  result files, one with the result of all clients, and one with the result of all
+  servers.
+
+* For method overriding an API/Base class, at least create an {@inheritDoc} comment.
+
+* Review Exception handling and logging code: *All* exceptions should be logged, even if we just
+  silently swallow them. It follows that we have no reason to create a separate log output when
+  we explicitly create and throw an exception (because we *know* it will be logged), unless
+  there is something we want to log, which is not part of the exception message. But it is usually
+  better to improve the exception message instead.
+
+* Test the Faster-Than-Socket API, and see if we should use that over embedded
+  Cassandra, instead of using sockets. If we do, we should see if it makes
+  sense for VoltDB and the "Proxy" as well.
+
+* Rename Backend to Engine.
+
+* Represent a DB as an URI string. This allows us to have a unified representation,
+  so that we could for example just store the URI in a property file, and the code
+  could automatically choose the right engine to open the DB based on the URI.
+
+* When all is done, it might be interesting to add an "hint" to the table creation,
+  saying if you want hashed index or btree. So we can choose in the backends that
+  support both.
+
+* If it doesn't exist yet, create an engine capabilities object, that contains
+  info about what the engine can and cannot do. For example, can we create table
+  dynamically?
+
+* Backups, which should hopefully be already possible using the API, should always
+  point to a directory rather than a file, because different engines will have
+  different backup strategies, and some might use more than one file, but we would
+  like to have a single notation/format for backup locations.
+
+* All our jars should be OSGified. This means create some manifest data
+  for each jar, and possibly some kind of "manager" to start/stop the jar
+  and it's associated services, and possibly refactor the packages to
+  follow the standard OSGi structure.
+
+* If we store the row => cols mapping separately for performance reasons,
+  we should try to build some kind of tree structure so that adding or
+  removing columns will not involve changing large blobs used to represent
+  the mapping. There is an interesting Scala class that we could use as "model":
+  http://www.scala-lang.org/docu/files/collections-api/collections_15.html
+  Basically it stores the data has a tree, but each "level" has many values,
+  so that you only add a new "level" when you reach a certain size N. You
+  start like a simple array-list, and become and array of array-list after
+  you reached N. Possibly going to 3 levels for very large lists. This sounds
+  useful for LevelDB, but I'm not sure about BDB.
+
+* Add timestamp storage for LevelDB and BDB (probably in the row => col mapping).
+  Update the API so that timestamp can be specified explicitly on the client
+  and also queried when reading.
+
+* Protocol: All operations on blob values can be expressed by: Index+Length+Data
+  Where index is the position in the existing data, and Length is either
+  positive, and specify how much data follows and has to be inserted, or
+  Length is negative, in which case no data follow, but Length bytes
+  at the Index must be deleted. That would make a very simple protocol,
+  if we tried to create an engine-agnostic protocol on the server-side.
+
+* LevelDB - Automate adding new java stored procedures through a script.
+
+* Download LevelDB and install it. We need the JNI implementation as well.
+   You might even have to compile the native implementation yourself, so it
+   might be somewhat difficult. Remember that we need the application to run
+   on Windows, Linux and Mac. I don't have a Mac, and I assume you do not
+   either. So we will leave the Mac implementation for now, but you have to
+   make sure that it is "possible". Get an overview of how to use it, and go
+   through some examples/demos.
+
+* Implement the API over LevelDB. Each table will be a file. Since it is a
+   key-value store, there is no support for the "column names" directly. My
+   concept would be to concatenate the byte representation of the row key
+   with the byte representation of the column name, so that we get a 16 bytes
+   array that will be then used as key in LevelDB. Range select is possible
+   in LevelDb because the keys are sorted, if I understand well. To enable
+   range selects, the row bytes must be the "most significant", which usually
+   means that they come *after* the column-name bytes.
+
+* Runs the unit tests and benchmark to test the LevelDB implementation.
+   We might need to make more changes to the API.
+
+* DBTool
+   * Get statistics about memory/disk space used per table and in total.
+     RowID list/ranges as inputs can be done in phase 2.
+   * Perform backup/restore/snapshot by delegating to the DB own backup tools.
+   * Export command - if output file more than a certain limit, the tool should
+     create multiple files.
+   * The tool should allow filtering of rows based on range/rowId list.
+   * Create a simple binary format (probably similar to CSV). Since the bytes
+     will not have to be transformed in strings, it might actually be much faster.
+   * If the format allows it, we would want a simple property mapping, of db name,
+     creation date, ...
+
+* Document how to perform daily backups and restore (usually within cron jobs).
+  The client side must be able to initialize itself without the user having to
+  configure or install anything manually.
+
+* Explore this: http://techblog.netflix.com/2012/01/announcing-astyanax.html we should
+  consider using it instead of Hector. Netflix is huge and sure spend lots
+  of cache optimizing it.
+
+* Explore Priam : http://techblog.netflix.com/2012/02/announcing-priam.html tools for
+  managing configuration, providing reliable and automated backup/recovery etc.
+
+* Check out every DB documentation to work out what is the error detection
+  and recovery behavior. We do not want our data to get lost/destroyed,
+  and if anything happens, it would be good to know *what* was destroyed,
+  and try to recover the rest. Depending on what is available, we might
+  want to add functionality to the API to perform validation checks,
+  recovery, ... Also check if there is any routine maintenance that needs
+  to be done, like for example compacting drive space, defragmenting, ...
+  That might have to be added to the API too. Finally, check what statistics
+  can be extracted from the API, and if there would be some way of exporting
+  it (JSON, XML, CSV?)
+
+* Cassandra Embedded -
+     *  Couldn't find how to set the Default consistency level and failure policy which Keyspace creation
+	find how to set consistency level and failure policy
+     *  The Embedded Cassandra API throws a null pointer exception if we create a blank keyspace (without any Column Family.)
+        Added a dummy column family while KS creation for to 'make it work' Need to find what should be the long term resolution.
+
+* VoltDB -
+     *  Currently byte[][] cannot be passed to Voltdb prcedure. The current implementation
+	merges all the blobs in a single byte[] before passing. After checking
+	on VoltDB forumns, found that there exists a open feature request pending
+	since 2010 for the support of blob arrays :
+	(https://issues.voltdb.com/browse/ENG-1974) The workaround suggested in the
+	forumn also doesn't solve the issue realted to copying the bytes arrays.
+     *  Reverse column sorting not supported currently in VoltDB.
+     *  Additional table creation requires copying java files, renaming table names and
+	running the Voltcompiler on them. Need a cleaner approach to this problem
+
+* LevelDB JNI -
+     *  The current JNI implementation doesn't support Windows platform.
+     *  While building On Linux 64 bit platform Maven build breaks. Didn't
+        find a workaround to for this yet. Asked the question on mailing lists.
+

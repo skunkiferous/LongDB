@@ -1,0 +1,357 @@
+{
+	"table": {
+			"row": [
+					   {
+							"_comment":"A row with negative row id",
+							"ID":"-20",
+							"column":[
+										{"ID":"1","type":"long","value":"11"}
+									]
+						},
+						{
+							"_comment":"A row with negative column id",
+							"ID":"21",
+							"column":[
+										{"ID":"-1","type":"long","value":"11"}
+									]
+						},
+						{
+							"_comment":"A row with negative column id and row id",
+							"ID":"-21",
+							"column":[
+										{"ID":"-1","type":"long","value":"11"}
+									]
+						},
+						
+						{
+							"_comment":"A row with zero as a columnID",
+							"ID":"20",
+							"column":[
+										{"ID":"0","type":"long","value":"11"}
+									]
+						},
+						{			
+							"_comment":"A row with one column only",
+							"ID":"1",
+							"column":[
+										{"ID":"1","type":"long","value":"11"}
+									]
+						},
+						{
+							"_comment":"A row with two columns type long and int",							
+							"ID":"2",
+							"column":[
+										{"ID":"1","type":"long","value":"21"},
+										{"ID":"2","type":"int","value":"22"}
+									]
+						},
+						{
+							"_comment":"A row with three columns type long int and double",														
+							"ID":"3",
+							"column":[
+										{"ID":"1","type":"long","value":"31"},
+										{"ID":"2","type":"int","value":"32"},
+										{"ID":"3","type":"double","value":"33"}
+									]
+						},
+						{
+							"_comment":"A row with four columns type long int double and byte",	
+							"ID":"4",
+							"column":[
+										{"ID":"1","type":"long","value":"41"},
+										{"ID":"2","type":"int","value":"42"},
+										{"ID":"3","type":"double","value":"43"},
+										{"ID":"4","type":"byte","value":"44"},
+									]	
+						},
+						{
+							"_comment":"A row with five columns type long int double byte and short",	
+							"ID":"5",
+							"column":[
+										{"ID":"1","type":"long","value":"51"},
+										{"ID":"2","type":"int","value":"52"},
+										{"ID":"3","type":"double","value":"53"},
+										{"ID":"4","type":"byte","value":"54"},
+										{"ID":"5","type":"short","value":"55"},
+									]
+						},
+						{
+							"_comment":"A row with six columns type long int double byte short and String",	
+							"ID":"6",
+							"column":[
+										{"ID":"1","type":"long","value":"61"},
+										{"ID":"2","type":"int","value":"62"},
+										{"ID":"3","type":"double","value":"63"},
+										{"ID":"4","type":"byte","value":"64"},
+										{"ID":"5","type":"short","value":"65"},
+										{"ID":"6","type":"String","value":"66"}												
+									]
+						},
+						{
+							"_comment":"A row with seven columns type long int double byte short String, blob",	
+							"ID":"7",
+							"column":[
+										{"ID":"1","type":"long","value":"71"},
+										{"ID":"2","type":"int","value":"72"},
+										{"ID":"3","type":"double","value":"73"},
+										{"ID":"4","type":"byte","value":"74"},
+										{"ID":"5","type":"short","value":"75"},
+										{"ID":"6","type":"String","value":"76"},
+										{"ID":"7","type":"blob(100)","value":"undefined"},												
+									]
+						},
+						
+						{
+							"_comment":"A row with six columns type long int double byte short and String",	
+							"ID":"9",
+							"column":[
+										{"ID":"1","type":"long","value":"91"},
+										{"ID":"2","type":"int","value":"92"},
+										{"ID":"3","type":"double","value":"93"},
+										{"ID":"4","type":"byte","value":"94"},
+										{"ID":"5","type":"short","value":"95"},
+										{"ID":"6","type":"String","value":"96"},
+										{"ID":"7","type":"String","value":"To be changed"}												
+									]
+						},
+						{
+							"_comment":"A row with six columns type long int double byte short and String",	
+							"ID":"10",
+							"column":[
+										{"ID":"1","type":"long","value":"101"},
+										{"ID":"2","type":"int","value":"102"},
+										{"ID":"3","type":"double","value":"103"},
+										{"ID":"4","type":"byte","value":"104"},
+										{"ID":"5","type":"short","value":"105"},
+										{"ID":"6","type":"String","value":"106"}											
+									]
+						},
+						{
+							"_comment":"row full of blobs",	
+							"ID":"11",
+							"column":[
+										{"ID":"1","type":"blob(10)","value":"undefined"},
+										{"ID":"2","type":"blob(100)","value":"undefined"},
+										{"ID":"3","type":"blob(1000)","value":"undefined"},
+										{"ID":"4","type":"blob(10000)","value":"undefined"},
+										{"ID":"5","type":"blob(100000)","value":"undefined"},																						
+									]
+						},
+						{
+							"_comment":"row full of blobs",	
+							"ID":"12",
+							"column":[
+										{"ID":"1","type":"blob(100000)","value":"undefined"},
+										{"ID":"2","type":"blob(10000)","value":"undefined"},
+										{"ID":"3","type":"blob(1000)","value":"undefined"},
+										{"ID":"4","type":"blob(10000)","value":"undefined"},
+										{"ID":"5","type":"blob(100000)","value":"undefined"},																						
+									]
+						},
+						{
+							"_comment":"row full of blobs",	
+							"ID":"13",
+							"column":[
+										{"ID":"0","type":"blob(100000)","value":"undefined"},
+										{"ID":"1","type":"blob(1000)","value":"undefined"},
+										{"ID":"2","type":"blob(10000)","value":"undefined"},
+										{"ID":"3","type":"blob(1000)","value":"undefined"},
+										{"ID":"4","type":"blob(10000)","value":"undefined"},
+										{"ID":"5","type":"blob(100000)","value":"undefined"},																						
+									]
+						},
+						{
+							"_comment":"row full of blobs",	
+							"ID":"14",
+							"column":[
+										{"ID":"0","type":"blob(100000)","value":"undefined"},
+										{"ID":"1","type":"blob(10000)","value":"undefined"},
+										{"ID":"10","type":"blob(1000)","value":"undefined"},
+										{"ID":"20","type":"blob(10000)","value":"undefined"},
+										{"ID":"30","type":"blob(100000)","value":"undefined"},																						
+									]
+						},
+						{
+							"_comment":"row full of blobs, large column ID values.",	
+							"ID":"15",
+							"column":[
+										{"ID":"100","type":"blob(1)","value":"undefined"},
+										{"ID":"10000","type":"blob(1)","value":"undefined"},
+										{"ID":"1000000","type":"blob(1)","value":"undefined"},
+										{"ID":"100000000","type":"blob(1)","value":"undefined"},
+										{"ID":"1000000000","type":"blob(1)","value":"undefined"},																						
+									]
+						},
+						{
+							"_comment":"row full of blobs, large column ID values, large row value",	
+							"ID":"100",
+							"column":[
+										{"ID":"100","type":"blob(100000)","value":"undefined"},
+										{"ID":"10000","type":"blob(10000)","value":"undefined"},
+										{"ID":"1000000","type":"blob(1000)","value":"undefined"},
+										{"ID":"100000000","type":"blob(10000)","value":"undefined"},
+										{"ID":"1000000000","type":"blob(100000)","value":"undefined"},																						
+									]
+						},
+						{
+							"_comment":"another row full of blobs, large column ID values, large row value",	
+							"ID":"1000",
+							"column":[
+										{"ID":"100000000","type":"blob(100000)","value":"undefined"},
+										{"ID":"10000000","type":"blob(10000)","value":"undefined"},
+										{"ID":"1000000","type":"blob(1000)","value":"undefined"},
+										{"ID":"10000","type":"blob(10000)","value":"undefined"},
+										{"ID":"100","type":"blob(100000)","value":"undefined"},																						
+									]
+						}
+					]
+					},
+					
+"addColumns": {
+			"row":[
+						{
+							"_comment":"Adding three new columns to row id 11",	
+							"ID":"11",
+							"column":[
+								{"ID":"6","type":"String","value":"Added"},
+								{"ID":"8","type":"String","value":"Added"},
+								{"ID":"9","type":"String","value":"Added"}											
+							]
+						},
+						{
+							"_comment":"Adding new column to row id 9 with six columns",
+							"ID":"9",
+							"column":[
+								{"ID":"8","type":"String","value":"Added"}											
+							]
+						},
+						{
+							"_comment":"Adding new column to row id 10 with six columns",
+							"ID":"10",
+							"column":[
+								{"ID":"7","type":"String","value":"Added"}											
+							]
+						}
+						
+					 ]
+			   },
+"updateColumns": {
+				"row":[
+						{
+							"ID":"9",
+							"column":[
+								{"ID":"7","type":"String","value":"Modified"}											
+							]
+						},
+						{
+							"ID":"10",
+							"column":[
+								{"ID":"6","type":"String","value":"Modified"}											
+							]
+						}
+						
+					 ]
+			   },
+"addRemoveColumns": {
+				"row":[
+						{
+							"ID":"6",
+							"column":[
+								{"ID":"7","type":"String","value":"Added"}											
+							],
+							"deleteCols":[
+								{"ID":"1"},
+								{"ID":"2"}											
+							]
+						},
+						{
+							"ID":"7",
+							"column":[
+								{"ID":"8","type":"String","value":"Added"},
+								{"ID":"9","type":"blob(100000)","value":"Added"}											
+							],
+							"deleteCols":[
+								{"ID":"1"}											
+							]
+						}
+						
+					 ]
+			   },			   
+"updateRemoveColumns": {
+				"row":[
+						{
+							"ID":"6",
+							"column":[
+								{"ID":"6","type":"String","value":"Modified"}											
+							],
+							"deleteCols":[
+								{"ID":"1"},
+								{"ID":"2"}											
+							]
+						},
+						{
+							"ID":"7",
+							"column":[
+								{"ID":"6","type":"String","value":"Added"},
+								{"ID":"7","type":"blob(100000)","value":"Added"}											
+							],
+							"deleteCols":[
+								{"ID":"1"}											
+							]
+						}
+						
+					 ]
+			   },	
+"addRemoveColumns1": {
+					"row":[
+									{
+										"ID":"6",
+										"column":[
+											{"ID":"7","type":"String","value":"Added"}											
+										],
+										"deleteRange":{"RangeStart":"1","RangeEnd":"3"}																					
+									},
+									{
+										"ID":"7",
+										"column":[
+											{"ID":"8","type":"String","value":"Added"},
+											{"ID":"9","type":"blob(100000)","value":"Added"}											
+										],
+										"deleteRange":{"RangeStart":"1","RangeEnd":"3"}											
+									}
+					 			]
+			   				},			   
+"updateRemoveColumns1": {
+						"row":[
+									{
+										"ID":"6",
+										"column":[
+											{"ID":"6","type":"String","value":"Modified"}											
+										],
+										"deleteRange":{"RangeStart":"1","RangeEnd":"3"}																					
+									},
+									{
+										"ID":"7",
+										"column":[
+											{"ID":"6","type":"String","value":"Added"},
+											{"ID":"7","type":"blob(100000)","value":"Added"}											
+										],
+										"deleteRange":{"RangeStart":"1","RangeEnd":"3"}											
+									}
+					 			]
+			  	 		},
+"removeRows": {"rowID":["1","2"]},
+"removeColumns1":{
+				"row":[
+						{"ID":"4","deleteCols":[{"ID":"1"},{"ID":"2"}]},
+						{"ID":"5","deleteCols":[{"ID":"1"}]}
+					 ]
+			   },	
+"removeColumns2": {
+				"row":[
+						{"ID":"4","deleteRange":{"RangeStart":"1","RangeEnd":"3"}},
+						{"ID":"5","deleteRange":{"RangeStart":"1","RangeEnd":"3"}}
+			 		]
+			  	}
+			 				   		   
+}
