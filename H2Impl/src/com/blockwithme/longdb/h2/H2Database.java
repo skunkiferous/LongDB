@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2013 Sebastien Diot
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,6 +29,7 @@ import com.blockwithme.longdb.base.AbstractDatabase;
 import com.blockwithme.longdb.entities.Base36;
 import com.blockwithme.longdb.h2.config.SQLUtil;
 
+// TODO: Auto-generated Javadoc
 /** Implementation of a VoltDB BEDatabase. */
 @ParametersAreNonnullByDefault
 @edu.umd.cs.findbugs.annotations.SuppressWarnings(value = "CD_CIRCULAR_DEPENDENCY", justification = "This is our base class design")
@@ -37,10 +38,8 @@ public class H2Database extends
 
     /** Instantiates a new h2 database.
      * 
-     * @param theBackend
-     *        the backend
-     * @param theDBName
-     *        the database name */
+     * @param theBackend the backend
+     * @param theDBName the database name */
     protected H2Database(final H2Backend theBackend, final String theDBName) {
         super(theBackend, theDBName);
     }
@@ -49,14 +48,11 @@ public class H2Database extends
      * 
      * @return the connection */
     private Connection connection() {
-        return ((H2Backend) backend()).connection();
+        return backend().connection();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractDatabase#closeInternal()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.base.AbstractDatabase#closeInternal() */
     @Override
     protected void closeInternal() {
         // NOP
@@ -64,10 +60,8 @@ public class H2Database extends
 
     /** Executes SQL statement for table creation.
      * 
-     * @param theTable
-     *        the table name
-     * @param theProfile
-     *        the profile
+     * @param theTable the table name
+     * @param theProfile the profile
      * @return the newly created table instance */
     @Override
     protected H2Table createInternal(final Base36 theTable,
@@ -88,13 +82,10 @@ public class H2Database extends
         return new H2Table(this, theTable);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#dropInternal(com.paintedboxes
-     * .db.base.AbstractTable)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#dropInternal(com.blockwithme
+     * .longdb.base.AbstractTable) */
     @Override
     protected void dropInternal(final H2Table theTable) {
         final StringBuilder strBuf = new StringBuilder(); // $codepro.audit.disable
@@ -105,12 +96,9 @@ public class H2Database extends
         SQLUtil.executeStatement(createTable, connection());
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#openInternal(java.util.Map)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#openInternal(java.util.Map) */
     @Override
     protected void openInternal(final Map<Base36, H2Table> theTables) {
         theTables.clear();

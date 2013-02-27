@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2013 Sebastien Diot
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,6 +32,7 @@ import com.sleepycat.je.Environment;
 import com.sleepycat.je.Transaction;
 import com.sleepycat.je.TransactionConfig;
 
+// TODO: Auto-generated Javadoc
 /** The BEDatabase implementation for BerkeleyDB. */
 @ParametersAreNonnullByDefault
 @edu.umd.cs.findbugs.annotations.SuppressWarnings(value = "CD_CIRCULAR_DEPENDENCY")
@@ -46,12 +47,9 @@ public class BDBDatabase extends
 
     /** Instantiates a new bDB database.
      * 
-     * @param theBackend
-     *        the Backend instance
-     * @param theDBEnv
-     *        the Environment object
-     * @param theDBName
-     *        the database name */
+     * @param theBackend the Backend instance
+     * @param theDBEnv the Environment object
+     * @param theDBName the database name */
     protected BDBDatabase(final BDBBackend theBackend,
             final Environment theDBEnv, final String theDBName) {
         super(theBackend, theDBName);
@@ -87,25 +85,20 @@ public class BDBDatabase extends
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#createInternal(com.paintedboxes
-     * .util.Base36, com.blockwithme.longdb.BETableProfile)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#createInternal(com.blockwithme
+     * .longdb.entities.Base36, com.blockwithme.longdb.BETableProfile) */
     @Override
     protected BDBTable createInternal(final Base36 theTable,
             final BETableProfile theProfile) {
         try {
-            /*
-             * TODO Setting ReverseKeyComparator is allowed, The issue is while
+            /* TODO Setting ReverseKeyComparator is allowed, The issue is while
              * fetching Table Meta-data BDB doesn't tell which key comparator
              * was set - workaround could be to find any other meta-data field
              * where this info could be stored.
              * (profile.reverseColumnsOrder)config.setBtreeComparator(
-             * ReverseKeyComparator.class);
-             */
+             * ReverseKeyComparator.class); */
             final BDBTable t = new BDBTable(this, theTable.toFixedString(),
                     theProfile.reverseColumnsOrder());
             t.open();
@@ -132,13 +125,10 @@ public class BDBDatabase extends
         return dbConf;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#dropInternal(com.paintedboxes
-     * .db.base.AbstractTable)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#dropInternal(com.blockwithme
+     * .longdb.base.AbstractTable) */
     @Override
     protected void dropInternal(final BDBTable theTable) {
         theTable.dropped();
@@ -148,12 +138,9 @@ public class BDBDatabase extends
         txn.commit();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#openInternal(java.util.Map)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#openInternal(java.util.Map) */
     @Override
     protected void openInternal(final Map<Base36, BDBTable> theTables) {
         theTables.clear();

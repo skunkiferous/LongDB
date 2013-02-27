@@ -1,17 +1,12 @@
 /*******************************************************************************
- * Copyright 2013 Sebastien Diot
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Copyright (c) 2013 Sebastien Diot..
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl.html
+ *
+ * Contributors:
+ *     Sebastien Diot. - initial API and implementation
  ******************************************************************************/
 // $codepro.audit.disable methodInvocationInLoopCondition
 package com.blockwithme.longdb.voltdb;
@@ -71,8 +66,7 @@ public class VoltDBTable extends
     }
 
     /** The method combines the blobs present in All the columns into a single
-     * byte array, this is a work around for the issues mentioned here :
-     * https://github.com/skunkiferous/PaintedBoxes/issues/4 */
+     * byte array, this is a work around for the issues mentioned in issue #4 */
     private static void constructParameters(final Columns theColumns,
             final LongArrayList theColumnIds, final ByteArrayList theBlobs,
             final IntArrayList theIndexArray) {
@@ -98,10 +92,8 @@ public class VoltDBTable extends
     /* This constructor will is used for initializing a existing DB */
     /** Instantiates a new volt db table.
      * 
-     * @param theDB
-     *        the database
-     * @param theTableName
-     *        the table name */
+     * @param theDB the database
+     * @param theTableName the table name */
     protected VoltDBTable(final VoltDatabase theDB, final String theTableName) {
         super(theDB, Base36.get(theTableName), false, false);
     }
@@ -126,8 +118,7 @@ public class VoltDBTable extends
 
     /** Returns number of columns for a row key.
      * 
-     * @param theKey
-     *        the row key
+     * @param theKey the row key
      * @return the count of column in the selected row. */
     @Override
     protected long columnsCountInternal(final long theKey) {
@@ -146,8 +137,7 @@ public class VoltDBTable extends
 
     /** Returns all columnIds for a row.
      * 
-     * @param theKey
-     *        the row key
+     * @param theKey the row key
      * @return the list of column ids to be retrieved. */
     @Override
     @CheckForNull
@@ -174,8 +164,7 @@ public class VoltDBTable extends
 
     /** Returns iterator of all columnIds for a row.
      * 
-     * @param theKey
-     *        the row key
+     * @param theKey the row key
      * @return the column id iterator */
     @Override
     @CheckForNull
@@ -207,10 +196,8 @@ public class VoltDBTable extends
 
     /** Returns Column entries for a row, filtered by a set of columnIds.
      * 
-     * @param theKey
-     *        the row key
-     * @param theColumns
-     *        the list of column ids to be retrieved.
+     * @param theKey the row key
+     * @param theColumns the list of column ids to be retrieved.
      * @return the retrieved column data. */
     @Override
     protected Columns getInternal(final long theKey,
@@ -232,10 +219,8 @@ public class VoltDBTable extends
 
     /** Returns Column entries for a row, filtered by a range of columnIds.
      * 
-     * @param theKey
-     *        the row key
-     * @param theRange
-     *        the range of column ids to be retrieved.
+     * @param theKey the row key
+     * @param theRange the range of column ids to be retrieved.
      * @return the retrieved columns data. */
     @Override
     @CheckForNull
@@ -276,10 +261,8 @@ public class VoltDBTable extends
 
     /** Removes columns in List specified by 'remove'.
      * 
-     * @param theKey
-     *        the row key
-     * @param theRemoveCols
-     *        the list of column ids to be removed */
+     * @param theKey the row key
+     * @param theRemoveCols the list of column ids to be removed */
     @Override
     protected void removeInternal(final long theKey,
             final LongArrayList theRemoveCols) {
@@ -301,10 +284,8 @@ public class VoltDBTable extends
 
     /** Removes columns in Range specified by 'remove'.
      * 
-     * @param theKey
-     *        the row key
-     * @param theRemoveCols
-     *        the range of column ids to be removed */
+     * @param theKey the row key
+     * @param theRemoveCols the range of column ids to be removed */
     @Override
     protected void removeInternal(final long theKey, final Range theRemoveCols) {
         if (theRemoveCols.empty())
@@ -342,12 +323,9 @@ public class VoltDBTable extends
     /** Updates row with columns specified by insertOrUpdate and removes columns
      * in 'remove' List. Remove operation is performed before update.
      * 
-     * @param theKey
-     *        the row key
-     * @param theInsertUpdateColumns
-     *        columns to be inserted or updated
-     * @param theRemoveCols
-     *        column ids to be removed */
+     * @param theKey the row key
+     * @param theInsertUpdateColumns columns to be inserted or updated
+     * @param theRemoveCols column ids to be removed */
     @Override
     protected void setInternal(final long theKey,
             final Columns theInsertUpdateColumns,
@@ -447,11 +425,8 @@ public class VoltDBTable extends
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#reverseSupported()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#reverseSupported() */
     @Override
     public boolean reverseSupported() {
         return false;

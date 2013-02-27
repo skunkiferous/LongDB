@@ -17,7 +17,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.paintedboxes</groupId>
+		<groupId>com.blockwithme</groupId>
 		<!-- NOTE: artifactId should be same as the project folder names. -->
 		<artifactId>Datastore</artifactId>
 		<version>0.0.1-SNAPSHOT</version>

@@ -32,6 +32,7 @@ import com.google.inject.Inject;
 import com.sleepycat.je.Environment;
 import com.sleepycat.je.EnvironmentConfig;
 
+// TODO: Auto-generated Javadoc
 /** BerkeleyDB Backend Implementation */
 @ParametersAreNonnullByDefault
 public class BDBBackend extends
@@ -111,8 +112,8 @@ public class BDBBackend extends
 
     /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractBackend#dropInternal(com.paintedboxes
-     * .db.base.AbstractDatabase) */
+     * com.blockwithme.longdb.base.AbstractBackend#dropInternal(com.blockwithme
+     * .longdb.base.AbstractDatabase) */
     @Override
     protected void dropInternal(final BDBDatabase theDB) {
         try {

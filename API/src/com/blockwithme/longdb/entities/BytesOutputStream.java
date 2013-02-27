@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2013 Sebastien Diot
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -52,10 +52,10 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
     /** Capacity expanded by 8 bytes */
     private static final int EIGHT_BYTES_EXPAND = 8;
 
-    /** The com.paintedboxes.ser where data is stored. */
+    /** The com.blockwithme.ser where data is stored. */
     private byte[] buf;
 
-    /** The number of valid bytes in the com.paintedboxes.ser. */
+    /** The number of valid bytes in the com.blockwithme.ser. */
     private int count;
 
     /** Just for UTF8 */
@@ -68,11 +68,10 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
         this(INITIAL_CAPACITY_BYTES);
     }
 
-    /** Creates a new byte array output stream, with a com.paintedboxes.ser
+    /** Creates a new byte array output stream, with a com.blockwithme.ser
      * capacity of the specified size, in bytes.
      * 
-     * @param theSize
-     *        the initial capacity. */
+     * @param theSize the initial capacity. */
     public BytesOutputStream(final int theSize) {
         if (theSize < 0) {
             throw new IllegalArgumentException("Negative initial size: "
@@ -94,51 +93,36 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
         return new Bytes(buf, 0, count);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.ByteArrayOutputStream#close()
-     */
+    /* (non-Javadoc)
+     * @see java.io.ByteArrayOutputStream#close() */
     @Override
     public void close() throws IOException {
         // NOP
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.ByteArrayOutputStream#reset()
-     */
+    /* (non-Javadoc)
+     * @see java.io.ByteArrayOutputStream#reset() */
     @Override
     public void reset() {
         count = 0;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.ByteArrayOutputStream#size()
-     */
+    /* (non-Javadoc)
+     * @see java.io.ByteArrayOutputStream#size() */
     @Override
     public int size() {
         return count;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.ByteArrayOutputStream#toByteArray()
-     */
+    /* (non-Javadoc)
+     * @see java.io.ByteArrayOutputStream#toByteArray() */
     @Override
     public byte toByteArray()[] {
         return Arrays.copyOf(buf, count);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.ByteArrayOutputStream#toString()
-     */
+    /* (non-Javadoc)
+     * @see java.io.ByteArrayOutputStream#toString() */
     @Override
     public String toString() {
         try {
@@ -149,22 +133,16 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.ByteArrayOutputStream#toString(java.lang.String)
-     */
+    /* (non-Javadoc)
+     * @see java.io.ByteArrayOutputStream#toString(java.lang.String) */
     @Override
     public String toString(final String theCharsetName)
             throws UnsupportedEncodingException {
         return new String(buf, 0, count, theCharsetName);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.ByteArrayOutputStream#write(byte[], int, int)
-     */
+    /* (non-Javadoc)
+     * @see java.io.ByteArrayOutputStream#write(byte[], int, int) */
     @Override
     public void write(final byte[] theByteArray, final int theOffset,
             final int theLength) {
@@ -181,11 +159,8 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
         count += theLength;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.ByteArrayOutputStream#write(int)
-     */
+    /* (non-Javadoc)
+     * @see java.io.ByteArrayOutputStream#write(int) */
     @Override
     public void write(final int theByte) {
         extend(1);
@@ -193,11 +168,8 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
         count++;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.DataOutput#writeBoolean(boolean)
-     */
+    /* (non-Javadoc)
+     * @see java.io.DataOutput#writeBoolean(boolean) */
     @Override
     public void writeBoolean(final boolean theValue) throws IOException {
         extend(1);
@@ -205,11 +177,8 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
         count++;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.DataOutput#writeByte(int)
-     */
+    /* (non-Javadoc)
+     * @see java.io.DataOutput#writeByte(int) */
     @Override
     public void writeByte(final int theValue) throws IOException {
         extend(1);
@@ -217,11 +186,8 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
         count++;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.DataOutput#writeBytes(java.lang.String)
-     */
+    /* (non-Javadoc)
+     * @see java.io.DataOutput#writeBytes(java.lang.String) */
     @Override
     public void writeBytes(final String theStr) throws IOException {
         final int len = theStr.length();
@@ -231,11 +197,8 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.DataOutput#writeChar(int)
-     */
+    /* (non-Javadoc)
+     * @see java.io.DataOutput#writeChar(int) */
     @Override
     public void writeChar(final int theValue) throws IOException {
         extend(2);
@@ -243,11 +206,8 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
         buf[count++] = (byte) ((theValue >>> B_ONE_BYTE) & BYTE_MASK);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.DataOutput#writeChars(java.lang.String)
-     */
+    /* (non-Javadoc)
+     * @see java.io.DataOutput#writeChars(java.lang.String) */
     @Override
     public void writeChars(final String theStr) throws IOException {
         final int len = theStr.length();
@@ -259,31 +219,22 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.DataOutput#writeDouble(double)
-     */
+    /* (non-Javadoc)
+     * @see java.io.DataOutput#writeDouble(double) */
     @Override
     public void writeDouble(final double theValue) throws IOException {
         writeLong(Double.doubleToRawLongBits(theValue));
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.DataOutput#writeFloat(float)
-     */
+    /* (non-Javadoc)
+     * @see java.io.DataOutput#writeFloat(float) */
     @Override
     public void writeFloat(final float theValue) throws IOException {
         writeInt(Float.floatToRawIntBits(theValue));
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.DataOutput#writeInt(int)
-     */
+    /* (non-Javadoc)
+     * @see java.io.DataOutput#writeInt(int) */
     @Override
     public void writeInt(final int theValue) throws IOException {
         extend(FOUR_BYTES_EXPAND);
@@ -293,11 +244,8 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
         buf[count++] = (byte) ((theValue >>> B_THREE_BYTES) & BYTE_MASK);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.DataOutput#writeLong(long)
-     */
+    /* (non-Javadoc)
+     * @see java.io.DataOutput#writeLong(long) */
     @Override
     public void writeLong(final long theValue) throws IOException {
         extend(EIGHT_BYTES_EXPAND);
@@ -311,11 +259,8 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
         buf[count++] = (byte) ((theValue >>> B_SEVEN_BYTES) & BYTE_MASK);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.DataOutput#writeShort(int)
-     */
+    /* (non-Javadoc)
+     * @see java.io.DataOutput#writeShort(int) */
     @Override
     public void writeShort(final int theValue) throws IOException {
         extend(2);
@@ -331,21 +276,15 @@ public final class BytesOutputStream extends ByteArrayOutputStream implements
         count += Util.writeSize(theSize, buf, count);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.ByteArrayOutputStream#writeTo(java.io.OutputStream)
-     */
+    /* (non-Javadoc)
+     * @see java.io.ByteArrayOutputStream#writeTo(java.io.OutputStream) */
     @Override
     public void writeTo(final OutputStream theOutStrm) throws IOException {
         theOutStrm.write(buf, 0, count);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.io.DataOutput#writeUTF(java.lang.String)
-     */
+    /* (non-Javadoc)
+     * @see java.io.DataOutput#writeUTF(java.lang.String) */
     @Override
     public void writeUTF(final String theStr) throws IOException {
         if (dos == null) {

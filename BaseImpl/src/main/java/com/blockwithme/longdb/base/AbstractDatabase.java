@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2013 Sebastien Diot
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,14 +30,12 @@ import com.blockwithme.longdb.BETableProfile;
 import com.blockwithme.longdb.entities.Base36;
 import com.google.common.base.Preconditions;
 
+// TODO: Auto-generated Javadoc
 /** Implementation of a memory-backed BEDatabase. Useful for testing.
  * 
- * @param <B>
- *        the type of Backend
- * @param <D>
- *        the type of Database
- * @param <T>
- *        the type of Table */
+ * @param <B> the type of Backend
+ * @param <D> the type of Database
+ * @param <T> the type of Table */
 @ParametersAreNonnullByDefault
 public abstract class AbstractDatabase<B extends AbstractBackend<B, D, T>, D extends AbstractDatabase<B, D, T>, T extends AbstractTable<B, D, T>>
         implements BEDatabase {
@@ -66,10 +64,8 @@ public abstract class AbstractDatabase<B extends AbstractBackend<B, D, T>, D ext
 
     /** Protected Constructor.
      * 
-     * @param theBackend
-     *        the backend instance
-     * @param theDatabase
-     *        the database name */
+     * @param theBackend the backend instance
+     * @param theDatabase the database name */
     protected AbstractDatabase(final B theBackend, final String theDatabase) {
         Preconditions.checkNotNull(theBackend, "backend is null");
         Preconditions.checkNotNull(theDatabase, "database is null");
@@ -92,10 +88,8 @@ public abstract class AbstractDatabase<B extends AbstractBackend<B, D, T>, D ext
     /** Actually creates a table. The specific implementation of
      * {@link AbstractDatabase#create(Base36, BETableProfile)}
      * 
-     * @param theTable
-     *        the table name
-     * @param theProfile
-     *        the table profile
+     * @param theTable the table name
+     * @param theProfile the table profile
      * @return the table instance */
     protected abstract T createInternal(final Base36 theTable,
             final BETableProfile theProfile);
@@ -103,33 +97,25 @@ public abstract class AbstractDatabase<B extends AbstractBackend<B, D, T>, D ext
     /** Actually drop a table. Specific implementation of
      * {@link AbstractDatabase#drop(Base36)}
      * 
-     * @param theTable
-     *        the table to be dropped */
+     * @param theTable the table to be dropped */
     protected abstract void dropInternal(final T theTable);
 
     /** Actually opens the database, and scans for existing tables. Specific
      * implementation of {@link AbstractDatabase#open()}
      * 
-     * @param theTables
-     *        the map of tables */
+     * @param theTables the map of tables */
     protected abstract void openInternal(final Map<Base36, T> theTables);
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BEDatabase#backend()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BEDatabase#backend() */
     @Override
     public final B backend() {
         checkNotClosed();
         return backend;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BEDatabase#close()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BEDatabase#close() */
     @Override
     public final void close() {
         if (!closed) {
@@ -149,22 +135,17 @@ public abstract class AbstractDatabase<B extends AbstractBackend<B, D, T>, D ext
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BEDatabase#closed()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BEDatabase#closed() */
     @Override
     public final boolean closed() {
         return closed;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BEDatabase#create(com.paintedboxes.util.Base36,
-     * com.blockwithme.longdb.BETableProfile)
-     */
+    /* (non-Javadoc)
+     * @see
+     * com.blockwithme.longdb.BEDatabase#create(com.blockwithme.longdb.entities
+     * .Base36, com.blockwithme.longdb.BETableProfile) */
     @Override
     public final T create(final Base36 theTable, final BETableProfile theProfile) {
         open();
@@ -179,22 +160,18 @@ public abstract class AbstractDatabase<B extends AbstractBackend<B, D, T>, D ext
         return result;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BEDatabase#database()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BEDatabase#database() */
     @Override
     public final String database() {
         // checkNotClosed();
         return database;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BEDatabase#drop(com.paintedboxes.util.Base36)
-     */
+    /* (non-Javadoc)
+     * @see
+     * com.blockwithme.longdb.BEDatabase#drop(com.blockwithme.longdb.entities
+     * .Base36) */
     @Override
     public final boolean drop(final Base36 theTable) {
         open();
@@ -210,11 +187,10 @@ public abstract class AbstractDatabase<B extends AbstractBackend<B, D, T>, D ext
         return false;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BEDatabase#get(com.paintedboxes.util.Base36)
-     */
+    /* (non-Javadoc)
+     * @see
+     * com.blockwithme.longdb.BEDatabase#get(com.blockwithme.longdb.entities
+     * .Base36) */
     @Override
     public final T get(final Base36 theTable) {
         open();
@@ -233,11 +209,8 @@ public abstract class AbstractDatabase<B extends AbstractBackend<B, D, T>, D ext
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BEDatabase#tables()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BEDatabase#tables() */
     @Override
     public final Collection<Base36> tables() {
         open();

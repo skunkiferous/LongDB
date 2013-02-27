@@ -1,18 +1,13 @@
 <?xml version="1.0"?>
 <!--
-  Copyright 2013 Sebastien Diot
-  
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-  
-    http://www.apache.org/licenses/LICENSE-2.0
-  
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
+  Copyright (c) 2013 Sebastien Diot..
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the GNU Public License v3.0
+  which accompanies this distribution, and is available at
+  http://www.gnu.org/licenses/gpl.html
+
+  Contributors:
+      Sebastien Diot. - initial API and implementation
 -->
 <project>
 	<info>
@@ -26,77 +21,77 @@
 		</schemas>
 		<procedures>
 			<!-- Procedures of T1 -->
-			<procedure class="com.paintedboxes.voltdb.server.t1.InsertUpdateRemoveT1" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t1.InsertUpdateRemoveT1" />
 			<procedure
-				class="com.paintedboxes.voltdb.server.t1.InsertUpdateRemoveRangeT1" />
-			<procedure class="com.paintedboxes.voltdb.server.t1.SelectInListT1" />
-			<procedure class="com.paintedboxes.voltdb.server.t1.SelectRowCountT1" />
-			<procedure class="com.paintedboxes.voltdb.server.t1.SelectColumnCountT1" />
-			<procedure class="com.paintedboxes.voltdb.server.t1.SelectRowT1" />
-			<procedure class="com.paintedboxes.voltdb.server.t1.SelectColumnT1" />
-			<procedure class="com.paintedboxes.voltdb.server.t1.SelectColumnInRangeT1" />
-			<procedure class="com.paintedboxes.voltdb.server.t1.SelectColumnLimitedT1" />
-			<procedure class="com.paintedboxes.voltdb.server.t1.SelectColAllIdsT1" />
-			<procedure class="com.paintedboxes.voltdb.server.t1.SelectColItertorT1" />
+				class="com.blockwithme.longdb.voltdb.server.t1.InsertUpdateRemoveRangeT1" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t1.SelectInListT1" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t1.SelectRowCountT1" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t1.SelectColumnCountT1" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t1.SelectRowT1" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t1.SelectColumnT1" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t1.SelectColumnInRangeT1" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t1.SelectColumnLimitedT1" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t1.SelectColAllIdsT1" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t1.SelectColItertorT1" />
 			<!-- Procedures of T2 -->
-			<procedure class="com.paintedboxes.voltdb.server.t2.InsertUpdateRemoveT2" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t2.InsertUpdateRemoveT2" />
 			<procedure
-				class="com.paintedboxes.voltdb.server.t2.InsertUpdateRemoveRangeT2" />
-			<procedure class="com.paintedboxes.voltdb.server.t2.SelectInListT2" />
-			<procedure class="com.paintedboxes.voltdb.server.t2.SelectRowCountT2" />
-			<procedure class="com.paintedboxes.voltdb.server.t2.SelectColumnCountT2" />
-			<procedure class="com.paintedboxes.voltdb.server.t2.SelectRowT2" />
-			<procedure class="com.paintedboxes.voltdb.server.t2.SelectColumnT2" />
-			<procedure class="com.paintedboxes.voltdb.server.t2.SelectColumnInRangeT2" />
-			<procedure class="com.paintedboxes.voltdb.server.t2.SelectColumnLimitedT2" />
-			<procedure class="com.paintedboxes.voltdb.server.t2.SelectColAllIdsT2" />
-			<procedure class="com.paintedboxes.voltdb.server.t2.SelectColItertorT2" />
+				class="com.blockwithme.longdb.voltdb.server.t2.InsertUpdateRemoveRangeT2" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t2.SelectInListT2" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t2.SelectRowCountT2" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t2.SelectColumnCountT2" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t2.SelectRowT2" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t2.SelectColumnT2" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t2.SelectColumnInRangeT2" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t2.SelectColumnLimitedT2" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t2.SelectColAllIdsT2" />
+			<procedure class="com.blockwithme.longdb.voltdb.server.t2.SelectColItertorT2" />
 
 			<!-- Procedures of Defaulttable -->
 			<procedure
-				class="com.paintedboxes.voltdb.server.defaulttable.InsertUpdateRemoveDefaulttable" />
+				class="com.blockwithme.longdb.voltdb.server.defaulttable.InsertUpdateRemoveDefaulttable" />
 			<procedure
-				class="com.paintedboxes.voltdb.server.defaulttable.InsertUpdateRemoveRangeDefaulttable" />
+				class="com.blockwithme.longdb.voltdb.server.defaulttable.InsertUpdateRemoveRangeDefaulttable" />
 			<procedure
-				class="com.paintedboxes.voltdb.server.defaulttable.SelectInListDefaulttable" />
+				class="com.blockwithme.longdb.voltdb.server.defaulttable.SelectInListDefaulttable" />
 			<procedure
-				class="com.paintedboxes.voltdb.server.defaulttable.SelectRowCountDefaulttable" />
+				class="com.blockwithme.longdb.voltdb.server.defaulttable.SelectRowCountDefaulttable" />
 			<procedure
-				class="com.paintedboxes.voltdb.server.defaulttable.SelectColumnCountDefaulttable" />
+				class="com.blockwithme.longdb.voltdb.server.defaulttable.SelectColumnCountDefaulttable" />
 			<procedure
-				class="com.paintedboxes.voltdb.server.defaulttable.SelectRowDefaulttable" />
+				class="com.blockwithme.longdb.voltdb.server.defaulttable.SelectRowDefaulttable" />
 			<procedure
-				class="com.paintedboxes.voltdb.server.defaulttable.SelectColumnDefaulttable" />
+				class="com.blockwithme.longdb.voltdb.server.defaulttable.SelectColumnDefaulttable" />
 			<procedure
-				class="com.paintedboxes.voltdb.server.defaulttable.SelectColumnInRangeDefaulttable" />
+				class="com.blockwithme.longdb.voltdb.server.defaulttable.SelectColumnInRangeDefaulttable" />
 			<procedure
-				class="com.paintedboxes.voltdb.server.defaulttable.SelectColumnLimitedDefaulttable" />
+				class="com.blockwithme.longdb.voltdb.server.defaulttable.SelectColumnLimitedDefaulttable" />
 			<procedure
-				class="com.paintedboxes.voltdb.server.defaulttable.SelectColAllIdsDefaulttable" />
+				class="com.blockwithme.longdb.voltdb.server.defaulttable.SelectColAllIdsDefaulttable" />
 			<procedure
-				class="com.paintedboxes.voltdb.server.defaulttable.SelectColItertorDefaulttable" />
+				class="com.blockwithme.longdb.voltdb.server.defaulttable.SelectColItertorDefaulttable" />
 		</procedures>
 		<classdependencies>
 			<classdependency
-				class="com.paintedboxes.voltdb.server.base.IBaseStoredProc" />
+				class="com.blockwithme.longdb.voltdb.server.base.IBaseStoredProc" />
 			<classdependency
-				class="com.paintedboxes.voltdb.server.base.InsertUpdateRemove" />
+				class="com.blockwithme.longdb.voltdb.server.base.InsertUpdateRemove" />
 			<classdependency
-				class="com.paintedboxes.voltdb.server.base.InsertUpdateRemoveRange" />
+				class="com.blockwithme.longdb.voltdb.server.base.InsertUpdateRemoveRange" />
 			<classdependency
-				class="com.paintedboxes.voltdb.server.base.SelectColAllIds" />
+				class="com.blockwithme.longdb.voltdb.server.base.SelectColAllIds" />
 			<classdependency
-				class="com.paintedboxes.voltdb.server.base.SelectColItertor" />
-			<classdependency class="com.paintedboxes.voltdb.server.base.SelectColumn" />
+				class="com.blockwithme.longdb.voltdb.server.base.SelectColItertor" />
+			<classdependency class="com.blockwithme.longdb.voltdb.server.base.SelectColumn" />
 			<classdependency
-				class="com.paintedboxes.voltdb.server.base.SelectColumnCount" />
+				class="com.blockwithme.longdb.voltdb.server.base.SelectColumnCount" />
 			<classdependency
-				class="com.paintedboxes.voltdb.server.base.SelectColumnInRange" />
+				class="com.blockwithme.longdb.voltdb.server.base.SelectColumnInRange" />
 			<classdependency
-				class="com.paintedboxes.voltdb.server.base.SelectColumnLimited" />
-			<classdependency class="com.paintedboxes.voltdb.server.base.SelectInList" />
-			<classdependency class="com.paintedboxes.voltdb.server.base.SelectRow" />
-			<classdependency class="com.paintedboxes.voltdb.server.base.SelectRowCount" />
+				class="com.blockwithme.longdb.voltdb.server.base.SelectColumnLimited" />
+			<classdependency class="com.blockwithme.longdb.voltdb.server.base.SelectInList" />
+			<classdependency class="com.blockwithme.longdb.voltdb.server.base.SelectRow" />
+			<classdependency class="com.blockwithme.longdb.voltdb.server.base.SelectRowCount" />
 		</classdependencies>
 
 		<partitions>

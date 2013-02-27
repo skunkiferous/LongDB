@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2013 Sebastien Diot
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,6 +32,7 @@ import com.blockwithme.longdb.base.AbstractDatabase;
 import com.blockwithme.longdb.entities.Base36;
 import com.blockwithme.longdb.exception.DBException;
 
+// TODO: Auto-generated Javadoc
 /** Implementation of a Cassandra BEDatabase. */
 @ParametersAreNonnullByDefault
 public class CassandraEmbDatabase
@@ -42,10 +43,8 @@ public class CassandraEmbDatabase
 
     /** Instantiates a new cassandra embedded database.
      * 
-     * @param theBackend
-     *        the backend object
-     * @param theKSDef
-     *        the keyspace definition */
+     * @param theBackend the backend object
+     * @param theKSDef the keyspace definition */
     protected CassandraEmbDatabase(final CassandraEmbBackend theBackend,
             final KsDef theKSDef) {
         super(theBackend, theKSDef.getName());
@@ -54,10 +53,8 @@ public class CassandraEmbDatabase
 
     /** Instantiates a new cassandra embedded database.
      * 
-     * @param theBackend
-     *        the backend object
-     * @param theDBName
-     *        the database name */
+     * @param theBackend the backend object
+     * @param theDBName the database name */
     protected CassandraEmbDatabase(final CassandraEmbBackend theBackend,
             final String theDBName) {
 
@@ -84,10 +81,8 @@ public class CassandraEmbDatabase
 
     /** Creates the key space definition.
      * 
-     * @param theBackend
-     *        the backend object
-     * @param theDBName
-     *        the database name
+     * @param theBackend the backend object
+     * @param theDBName the database name
      * @return the key space definition */
     @SuppressWarnings("deprecation")
     private KsDef createKSDefinition(final CassandraEmbBackend theBackend,
@@ -108,23 +103,17 @@ public class CassandraEmbDatabase
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractDatabase#closeInternal()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.base.AbstractDatabase#closeInternal() */
     @Override
     protected void closeInternal() {
         // NOP
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#createInternal(com.paintedboxes
-     * .util.Base36, com.blockwithme.longdb.BETableProfile)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#createInternal(com.blockwithme
+     * .longdb.entities.Base36, com.blockwithme.longdb.BETableProfile) */
     @Override
     protected CassandraEmbTable createInternal(final Base36 theTable,
             final BETableProfile theProfile) {
@@ -132,24 +121,18 @@ public class CassandraEmbDatabase
                 theProfile.reverseColumnsOrder(), false);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#dropInternal(com.paintedboxes
-     * .db.base.AbstractTable)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#dropInternal(com.blockwithme
+     * .longdb.base.AbstractTable) */
     @Override
     protected void dropInternal(final CassandraEmbTable theTable) {
         theTable.dropped();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#openInternal(java.util.Map)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#openInternal(java.util.Map) */
     @Override
     protected void openInternal(final Map<Base36, CassandraEmbTable> theTables) {
         theTables.clear();

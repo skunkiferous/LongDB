@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2013 Sebastien Diot
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,6 +23,7 @@ import com.blockwithme.longdb.BETableProfile;
 import com.blockwithme.longdb.base.AbstractDatabase;
 import com.blockwithme.longdb.entities.Base36;
 
+// TODO: Auto-generated Javadoc
 /** Implementation of a memory-backed BEDatabase. Useful for testing. */
 @ParametersAreNonnullByDefault
 public class MemoryDatabase extends
@@ -30,31 +31,23 @@ public class MemoryDatabase extends
 
     /** Instantiates a new memory database.
      * 
-     * @param theBackend
-     *        the backend
-     * @param theDB
-     *        the database */
+     * @param theBackend the backend
+     * @param theDB the database */
     protected MemoryDatabase(final MemoryBackend theBackend, final String theDB) {
         super(theBackend, theDB);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractDatabase#closeInternal()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.base.AbstractDatabase#closeInternal() */
     @Override
     protected void closeInternal() {
         // NOP
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#createInternal(com.paintedboxes
-     * .util.Base36, com.blockwithme.longdb.BETableProfile)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#createInternal(com.blockwithme
+     * .longdb.entities.Base36, com.blockwithme.longdb.BETableProfile) */
     @Override
     protected MemoryTable createInternal(final Base36 theTable,
             final BETableProfile theProfile) {
@@ -62,24 +55,18 @@ public class MemoryDatabase extends
                 theProfile.reverseColumnsOrder(), false);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#dropInternal(com.paintedboxes
-     * .db.base.AbstractTable)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#dropInternal(com.blockwithme
+     * .longdb.base.AbstractTable) */
     @Override
     protected void dropInternal(final MemoryTable theTable) {
         theTable.dropped();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#openInternal(java.util.Map)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#openInternal(java.util.Map) */
     @Override
     protected void openInternal(final Map<Base36, MemoryTable> theTables) {
         // NOP

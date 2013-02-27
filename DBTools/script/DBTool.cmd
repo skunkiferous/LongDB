@@ -1,22 +1,22 @@
 @ECHO OFF
 
-IF "%PB_ROOT%"=="" set PB_ROOT=C:\work\workspace\PaintedBoxes6\Datastore
+IF "%PB_ROOT%"=="" set PB_ROOT=C:\work\workspace\LongDB
 IF "%JAVA_HOME%"=="" set JAVA_HOME=c:\Progra~2\Java\jdk1.7.0_03
 IF "%MAVEN_REPO%"=="" set MAVEN_REPO=%USERPROFILE%\.m2\repository
 
 set CP=
-set CP=%MAVEN_REPO%\com\paintedboxes\API\0.0.1-SNAPSHOT\*
-set CP=%CP%;%MAVEN_REPO%\com\paintedboxes\APIClient\0.0.1-SNAPSHOT\*
-set CP=%CP%;%MAVEN_REPO%\com\paintedboxes\BaseImpl\0.0.1-SNAPSHOT\*
-set CP=%CP%;%MAVEN_REPO%\com\paintedboxes\BerkeleyDBImpl\0.0.1-SNAPSHOT\*
-set CP=%CP%;%MAVEN_REPO%\com\paintedboxes\CassandraEmbedded\0.0.1-SNAPSHOT\*
-set CP=%CP%;%MAVEN_REPO%\com\paintedboxes\CassandraImpl\0.0.1-SNAPSHOT\*
-set CP=%CP%;%MAVEN_REPO%\com\paintedboxes\CassandraServerSide\0.0.1-SNAPSHOT\*
-set CP=%CP%;%MAVEN_REPO%\com\paintedboxes\DBTools\0.0.1-SNAPSHOT\*
-set CP=%CP%;%MAVEN_REPO%\com\paintedboxes\H2Impl\0.0.1-SNAPSHOT\*
-set CP=%CP%;%MAVEN_REPO%\com\paintedboxes\LevelDBJavaImpl\0.0.1-SNAPSHOT\*
-set CP=%CP%;%MAVEN_REPO%\com\paintedboxes\MemoryImp\0.0.1-SNAPSHOT\*
-set CP=%CP%;%MAVEN_REPO%\com\paintedboxes\VoltDBImpl\0.0.1-SNAPSHOT\*
+set CP=%MAVEN_REPO%\com\blockwithme\API\0.0.1-SNAPSHOT\*
+set CP=%CP%;%MAVEN_REPO%\com\blockwithme\APIClient\0.0.1-SNAPSHOT\*
+set CP=%CP%;%MAVEN_REPO%\com\blockwithme\BaseImpl\0.0.1-SNAPSHOT\*
+set CP=%CP%;%MAVEN_REPO%\com\blockwithme\BerkeleyDBImpl\0.0.1-SNAPSHOT\*
+set CP=%CP%;%MAVEN_REPO%\com\blockwithme\CassandraEmbedded\0.0.1-SNAPSHOT\*
+set CP=%CP%;%MAVEN_REPO%\com\blockwithme\CassandraImpl\0.0.1-SNAPSHOT\*
+set CP=%CP%;%MAVEN_REPO%\com\blockwithme\CassandraServerSide\0.0.1-SNAPSHOT\*
+set CP=%CP%;%MAVEN_REPO%\com\blockwithme\DBTools\0.0.1-SNAPSHOT\*
+set CP=%CP%;%MAVEN_REPO%\com\blockwithme\H2Impl\0.0.1-SNAPSHOT\*
+set CP=%CP%;%MAVEN_REPO%\com\blockwithme\LevelDBJavaImpl\0.0.1-SNAPSHOT\*
+set CP=%CP%;%MAVEN_REPO%\com\blockwithme\MemoryImp\0.0.1-SNAPSHOT\*
+set CP=%CP%;%MAVEN_REPO%\com\blockwithme\VoltDBImpl\0.0.1-SNAPSHOT\*
 
 set CP=%CP%;%MAVEN_REPO%\org\antlr\antlr\3.4\*
 set CP=%CP%;%MAVEN_REPO%\org\antlr\antlr-runtime\3.4\*
@@ -74,4 +74,4 @@ set CP=%CP%;%MAVEN_REPO%\aopalliance\aopalliance\1.0\*
 
 set CLASSPATH=%CP%;
 
-"%JAVA_HOME%\bin\java.exe" -Xmx1024m -Dlog4j.configuration=file:///%PB_ROOT%\DBTools\resources\log4j-dbtool.properties com.paintedboxes.db.tools.DBTool %* 
+"%JAVA_HOME%\bin\java.exe" -Xmx1024m -Dlog4j.configuration=file:///%PB_ROOT%\DBTools\resources\log4j-dbtool.properties com.blockwithme.longdb.tools.DBTool %*

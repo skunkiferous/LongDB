@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2013 Sebastien Diot
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,6 +31,7 @@ import com.blockwithme.longdb.base.AbstractDatabase;
 import com.blockwithme.longdb.entities.Base36;
 import com.blockwithme.longdb.exception.DBException;
 
+// TODO: Auto-generated Javadoc
 /** The Class LevelDBDatabase. */
 @ParametersAreNonnullByDefault
 public class LevelDBDatabase extends
@@ -44,12 +45,9 @@ public class LevelDBDatabase extends
 
     /** Instantiates a new level db database.
      * 
-     * @param theBackend
-     *        the backend
-     * @param theDBFolder
-     *        the db folder
-     * @param theDBName
-     *        the db name */
+     * @param theBackend the backend
+     * @param theDBFolder the db folder
+     * @param theDBName the db name */
     protected LevelDBDatabase(final LevelDBBackend theBackend,
             final File theDBFolder, final String theDBName) {
         super(theBackend, theDBName);
@@ -58,8 +56,7 @@ public class LevelDBDatabase extends
 
     /** Gets the dir.
      * 
-     * @param theName
-     *        the name
+     * @param theName the name
      * @return the dir */
     private File getDir(final String theName) {
         final File tableDir = new File(dbFolder.getAbsolutePath() // $codepro.audit.disable
@@ -68,11 +65,8 @@ public class LevelDBDatabase extends
         return tableDir;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractDatabase#closeInternal()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.base.AbstractDatabase#closeInternal() */
     @Override
     protected void closeInternal() {
         for (final Base36 tableName : tables.keySet()) {
@@ -81,13 +75,10 @@ public class LevelDBDatabase extends
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#createInternal(com.paintedboxes
-     * .util.Base36, com.blockwithme.longdb.BETableProfile)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#createInternal(com.blockwithme
+     * .longdb.entities.Base36, com.blockwithme.longdb.BETableProfile) */
     @Override
     protected LevelDBTable createInternal(final Base36 theTable,
             final BETableProfile theProfile) {
@@ -114,13 +105,10 @@ public class LevelDBDatabase extends
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#dropInternal(com.paintedboxes
-     * .db.base.AbstractTable)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#dropInternal(com.blockwithme
+     * .longdb.base.AbstractTable) */
     @Override
     protected void dropInternal(final LevelDBTable theTable) {
         try {
@@ -143,12 +131,9 @@ public class LevelDBDatabase extends
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#openInternal(java.util.Map)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#openInternal(java.util.Map) */
     @Override
     protected void openInternal(final Map<Base36, LevelDBTable> theTables) {
         theTables.clear();

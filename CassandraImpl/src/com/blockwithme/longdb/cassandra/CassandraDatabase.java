@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2013 Sebastien Diot
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -35,6 +35,7 @@ import com.blockwithme.longdb.BETableProfile;
 import com.blockwithme.longdb.base.AbstractDatabase;
 import com.blockwithme.longdb.entities.Base36;
 
+// TODO: Auto-generated Javadoc
 /** Implementation of a Cassandra BEDatabase. */
 @ParametersAreNonnullByDefault
 public class CassandraDatabase extends
@@ -45,10 +46,8 @@ public class CassandraDatabase extends
 
     /** This constructor is called for initializing existing keyspace
      * 
-     * @param theBackend
-     *        the backend instance
-     * @param theKeySpace
-     *        the corresponding keyspace */
+     * @param theBackend the backend instance
+     * @param theKeySpace the corresponding keyspace */
     protected CassandraDatabase(final CassandraBackend theBackend,
             final KeyspaceDefinition theKeySpace) {
         super(theBackend, theKeySpace.getName());
@@ -57,10 +56,8 @@ public class CassandraDatabase extends
 
     /** This constructor is called for creating new KeySpace
      * 
-     * @param theBackend
-     *        the backend instance
-     * @param theDBName
-     *        the database instance */
+     * @param theBackend the backend instance
+     * @param theDBName the database instance */
     protected CassandraDatabase(final CassandraBackend theBackend,
             final String theDBName) {
 
@@ -120,10 +117,8 @@ public class CassandraDatabase extends
 
     /** Creates the key space definition.
      * 
-     * @param theBackend
-     *        the backend
-     * @param theDatabase
-     *        the database
+     * @param theBackend the backend
+     * @param theDatabase the database
      * @return the keyspace definition */
     private KeyspaceDefinition createKSDefinition(
             final CassandraBackend theBackend, final String theDatabase) {
@@ -134,23 +129,17 @@ public class CassandraDatabase extends
         return keyspaceDefinition;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractDatabase#closeInternal()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.base.AbstractDatabase#closeInternal() */
     @Override
     protected void closeInternal() {
         // NOP
     }
 
-    /*
-     * creates a new column family. (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#createInternal(com.paintedboxes
-     * .util.Base36, com.blockwithme.longdb.BETableProfile)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#createInternal(com.blockwithme
+     * .longdb.entities.Base36, com.blockwithme.longdb.BETableProfile) */
     @Override
     protected CassandraTable createInternal(final Base36 theTable,
             final BETableProfile theProfile) {
@@ -158,25 +147,19 @@ public class CassandraDatabase extends
                 theProfile.reverseColumnsOrder(), false);
     }
 
-    /*
-     * Drops column family (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#dropInternal(com.paintedboxes
-     * .db.base.AbstractTable)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#dropInternal(com.blockwithme
+     * .longdb.base.AbstractTable) */
     @Override
     protected void dropInternal(final CassandraTable theTable) {
         theTable.dropped();
     }
 
-    /*
-     * Gets the list of column families in the current keyspace and populate
+    /* Gets the list of column families in the current keyspace and populate
      * 'tables' map (non-Javadoc)
-     * 
      * @see
-     * com.blockwithme.longdb.base.AbstractDatabase#openInternal(java.util.Map)
-     */
+     * com.blockwithme.longdb.base.AbstractDatabase#openInternal(java.util.Map) */
     @Override
     protected void openInternal(final Map<Base36, CassandraTable> theTables) {
         theTables.clear();
