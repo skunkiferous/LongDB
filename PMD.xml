@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ruleset xmlns="http://pmd.sf.net/ruleset/1.0.0" name="PMD2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd"
+	xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd">
+	<description>Test</description>
+
+	<rule ref="rulesets/design.xml/AbstractClassWithoutAnyMethod">
+		<priority>3</priority>
+	</rule>
+	<!--
+	Naming convention.
+	<rule ref="rulesets/naming.xml/AbstractNaming" />
+	-->
+	<rule ref="rulesets/design.xml/AccessorClassGeneration" />
+<!--
+
+	<rule ref="rulesets/controversial.xml/AtLeastOneConstructor" />
+
+-->
+	<rule ref="rulesets/basic.xml/AvoidDecimalLiteralsInBigDecimalConstructor" />
+	<!--
+		flagging cases logger string literals are repeated.
+		<rule ref="rulesets/strings.xml/AvoidDuplicateLiterals" />
+	-->
+<!--
+	Not as per our coding guidelines.
+	<rule ref="rulesets/naming.xml/AvoidFieldNameMatchingMethodName" />
+-->	
+	<rule ref="rulesets/naming.xml/AvoidFieldNameMatchingTypeName" />
+	<!--
+	Conflicts with other rules which say that if local variable is assingned
+	only once then make it final.
+	<rule ref="rulesets/controversial.xml/AvoidFinalLocalVariable" />
+	-->
+	<rule ref="rulesets/basic.xml/AvoidMultipleUnaryOperators">
+		<priority>3</priority>
+	</rule>
+	<rule ref="rulesets/strictexception.xml/AvoidRethrowingException" />
+	<rule ref="rulesets/strings.xml/AvoidStringBufferField" />
+	<rule
+		ref="rulesets/strictexception.xml/AvoidThrowingNewInstanceOfSameException" />
+	<rule ref="rulesets/basic.xml/AvoidUsingHardCodedIP" />
+	<!--
+		Java uses the 'short' type to reduce memory usage, not to optimize calculation. In fact, the jvm does not have any
+		arithmetic capabilities for the short type: the jvm must convert the short into an int, do the proper caculation
+		and convert the int back to a short. So, the use of the 'short' type may have a greater impact than memory usage.
+		Should we NOT use short ?
+	<rule ref="rulesets/controversial.xml/AvoidUsingShortType">
+		<priority>3</priority>
+	</rule>
+	-->
+
+
+	<rule ref="rulesets/controversial.xml/AvoidUsingVolatile">
+		<priority>3</priority>
+	</rule>
+	<!--
+		If a class is a bean, or is referenced by a bean directly or indirectly
+		it needs to be serializable. Member variables need to be marked as transient,
+		static, or have accessor methods in the class. Marking variables
+		as transient is the safest and easiest modification. Accessor methods should
+		follow the Java naming conventions, i.e.if you have a variable foo, you should
+		provide getFoo and setFoo methods.
+
+		Flags almost all non static fields and it cannont detect accessor methods becasue
+		we don't use Getter method naming convension.
+
+	<rule ref="rulesets/javabeans.xml/BeanMembersShouldSerialize" />
+	-->
+
+	<rule ref="rulesets/controversial.xml/BooleanInversion" />
+	<rule ref="rulesets/controversial.xml/CallSuperInConstructor" />
+	<rule ref="rulesets/basic.xml/CheckResultSet" />
+	<rule
+		ref="rulesets/design.xml/ClassWithOnlyPrivateConstructorsShouldBeFinal">
+		<priority>3</priority>
+	</rule>
+	<rule ref="rulesets/typeresolution.xml/CloneMethodMustImplementCloneable" />
+	<rule ref="rulesets/basic.xml/CollapsibleIfStatements" />
+	<!--
+	In an "if" expression with an "else" clause, avoid negation in
+	the test.
+	<rule ref="rulesets/design.xml/ConfusingTernary" />
+	-->
+	<rule ref="rulesets/strings.xml/ConsecutiveLiteralAppends" />
+	<rule ref="rulesets/coupling.xml/CouplingBetweenObjects" />
+	<rule ref="rulesets/controversial.xml/DataflowAnomalyAnalysis" />
+	<rule ref="rulesets/basic.xml/EmptyInitializer" />
+	<!--
+	Rule doesn't make sense since we need empty implementations to some abstract methods.
+	<rule ref="rulesets/design.xml/EmptyMethodInAbstractClassShouldBeAbstract">
+		<priority>3</priority>
+	</rule>
+	-->
+
+	<rule ref="rulesets/strictexception.xml/ExceptionAsFlowControl" />
+	<rule ref="rulesets/coupling.xml/ExcessiveImports" >
+		<priority>5</priority>
+	</rule>		
+	<rule ref="rulesets/codesize.xml/ExcessivePublicCount" >
+		<priority>5</priority>
+	</rule>	
+	<rule ref="rulesets/finalizers.xml/FinalizeOnlyCallsSuperFinalize" />
+	<rule ref="rulesets/basic.xml/ForLoopShouldBeWhileLoop" />
+	<rule ref="rulesets/migrating.xml/JUnitUseExpected" />
+	<rule ref="rulesets/codesize.xml/NPathComplexity" >
+		<priority>5</priority>
+	</rule>
+	<rule ref="rulesets/codesize.xml/NcssConstructorCount" >
+		<priority>5</priority>
+	</rule>
+	<rule ref="rulesets/codesize.xml/NcssMethodCount" >
+		<priority>5</priority>
+	</rule>
+	<rule ref="rulesets/codesize.xml/NcssTypeCount" >
+		<priority>5</priority>
+	</rule>	
+	<rule ref="rulesets/controversial.xml/NullAssignment" >
+		<priority>5</priority>
+	</rule>	
+	<rule ref="rulesets/design.xml/PositionLiteralsFirstInComparisons" />
+	<rule ref="rulesets/design.xml/PreserveStackTrace" />
+	<rule ref="rulesets/naming.xml/ShortMethodName" />
+	<rule ref="rulesets/design.xml/SimpleDateFormatNeedsLocale" />
+	<rule ref="rulesets/junit.xml/SimplifyBooleanAssertion" />
+	<rule ref="rulesets/design.xml/SimplifyConditional" />
+	<rule ref="rulesets/design.xml/SingularField" />
+	<!--
+	Not compatible with our coding guidelines.
+	<rule ref="rulesets/naming.xml/SuspiciousConstantFieldName" />
+	-->
+	<rule ref="rulesets/controversial.xml/SuspiciousOctalEscape" />
+	<rule ref="rulesets/design.xml/SwitchDensity" />
+	<rule ref="rulesets/junit.xml/TestClassWithoutTestCases" />
+	<rule ref="rulesets/design.xml/TooFewBranchesForASwitchStatement">
+		<priority>5</priority>
+	</rule>
+	<!--
+		<rule ref="rulesets/imports.xml/TooManyStaticImports" />
+	-->
+	<rule ref="rulesets/junit.xml/UnnecessaryBooleanAssertion" />
+	<rule ref="rulesets/strings.xml/UnnecessaryCaseChange" />
+	<rule ref="rulesets/design.xml/UnnecessaryLocalBeforeReturn" />
+	<rule ref="rulesets/design.xml/UnsynchronizedStaticDateFormatter" />
+	<rule ref="rulesets/basic.xml/UnusedNullCheckInEquals" />
+	<rule ref="rulesets/optimizations.xml/UseArraysAsList" />
+	<rule ref="rulesets/junit.xml/UseAssertEqualsInsteadOfAssertTrue" />
+	<rule ref="rulesets/junit.xml/UseAssertNullInsteadOfAssertTrue" />
+	<rule ref="rulesets/junit.xml/UseAssertSameInsteadOfAssertTrue" />
+	<rule ref="rulesets/design.xml/UseCollectionIsEmpty" />
+	<rule ref="rulesets/logging-jakarta-commons.xml/UseCorrectExceptionLogging" />
+	<rule ref="rulesets/strings.xml/UseIndexOfChar" />
+<!--
+	Taken care by check style.
+	<rule ref="rulesets/design.xml/UseSingleton" />
+-->
+	<rule ref="rulesets/basic.xml/UselessOperationOnImmutable" />
+	<rule ref="rulesets/strings.xml/UselessStringValueOf" />
+</ruleset>

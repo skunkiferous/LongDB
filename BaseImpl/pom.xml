@@ -134,7 +134,7 @@
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>2.9.1</version>
 				<configuration>
-					<configLocation>${project.basedir}/../../eclipse_script/exported_preferences/checkstyle.xml</configLocation>
+					<configLocation>${project.parent.basedir}/checkstyle.xml</configLocation>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -143,7 +143,7 @@
 				<version>2.7.1</version>
 				<configuration>
 					<rulesets>
-						<ruleset>${project.basedir}/../../eclipse_script/exported_preferences/PMD.xml</ruleset>
+						<ruleset>${project.parent.basedir}/PMD.xml</ruleset>
 					</rulesets>
 					<sourceEncoding>utf-8</sourceEncoding>
 					<minimumTokens>100</minimumTokens>
