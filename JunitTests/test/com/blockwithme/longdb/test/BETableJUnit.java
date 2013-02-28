@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2013 Sebastien Diot
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -136,10 +136,8 @@ public abstract class BETableJUnit {
 
     /** Clean up.
      * 
-     * @throws IOException
-     *         Signals that an I/O exception has occurred.
-     * @throws JSONException
-     *         the jSON exception */
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JSONException the jSON exception */
     private void cleanUp() throws IOException, JSONException {
         try {
             database.drop(Base36.get(TEST_TABLE_NAME));
@@ -174,8 +172,7 @@ public abstract class BETableJUnit {
 
     /** Gets the min max range from id list.
      * 
-     * @param theIDList
-     *        the i d list
+     * @param theIDList the i d list
      * @return the min max range from id list */
     private Range getMinMaxRangeFromIDList(final LongArrayList theIDList) {
 
@@ -196,10 +193,8 @@ public abstract class BETableJUnit {
 
     /** Initializes the db.
      * 
-     * @throws IOException
-     *         Signals that an I/O exception has occurred.
-     * @throws JSONException
-     *         the jSON exception */
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws JSONException the jSON exception */
     private void initDB() throws IOException, JSONException {
         J_UTIL = new JSONUtil("/InputJSON.txt");
         database = BE.openDatabase(DB_NAME);
@@ -219,8 +214,7 @@ public abstract class BETableJUnit {
 
     /** List to array.
      * 
-     * @param theColIdList
-     *        the column id list
+     * @param theColIdList the column id list
      * @return the long[] */
     private long[] listToArray(final List<Long> theColIdList) {
         final long[] colIds = new long[theColIdList.size()];
@@ -231,10 +225,8 @@ public abstract class BETableJUnit {
         return colIds;
     }
 
-    /*
-     * This method validated all the test data rows and compares the column
-     * values with the Test data encapsulated in JSONUtil class.
-     */
+    /* This method validated all the test data rows and compares the column
+     * values with the Test data encapsulated in JSONUtil class. */
     /** Validate all test rows. */
     private void validateAllTestRows() {
 
@@ -274,8 +266,7 @@ public abstract class BETableJUnit {
 
     /** Loads a Table using BE interfaces.
      * 
-     * @throws Exception
-     *         the exception */
+     * @throws Exception the exception */
     @Before
     public void setUp() throws Exception {
         initDB();
@@ -757,10 +748,14 @@ public abstract class BETableJUnit {
                         jColumnsData.size(), dbColumns2.size());
             }
 
+            // Commented this test case as it should return data if there is a
+            // column with column ID 0
             // pass zero as Range.
-            final Columns dbColumns3 = table.get(rowCursor.value, new Range(0,
-                    0));
-            assertNull("Setting Range to zero should return null", dbColumns3);
+            // final Columns dbColumns3 = table.get(rowCursor.value, new
+            // Range(0,
+            // 0));
+            // assertNull("Setting Range to zero should return null",
+            // dbColumns3);
 
         }
         // pass empty range.

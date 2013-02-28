@@ -34,12 +34,9 @@ import com.google.common.base.Preconditions;
  * force the implementation of the abstract methods to consider all possible
  * inputs. Use AbstractKeyIterator to implement the iterator method.
  * 
- * @param <B>
- *        the type of Backend.
- * @param <D>
- *        the type of Database
- * @param <T>
- *        the type of Table. */
+ * @param <B> the type of Backend.
+ * @param <D> the type of Database
+ * @param <T> the type of Table. */
 @ParametersAreNonnullByDefault
 public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extends AbstractDatabase<B, D, T>, T extends AbstractTable<B, D, T>>
         implements BETable {
@@ -76,14 +73,10 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
 
     /** Protected Constructor.
      * 
-     * @param theDatabase
-     *        the database instance
-     * @param theTable
-     *        the table instance
-     * @param theReverse
-     *        the reverse column sorting indicator
-     * @param theDetectCollisions
-     *        the detect collisions indicator */
+     * @param theDatabase the database instance
+     * @param theTable the table instance
+     * @param theReverse the reverse column sorting indicator
+     * @param theDetectCollisions the detect collisions indicator */
     protected AbstractTable(final D theDatabase, final Base36 theTable,
             final boolean theReverse, final boolean theDetectCollisions) {
         Preconditions.checkNotNull(theDatabase, "database is null");
@@ -101,16 +94,14 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
     /** The database specific implementation of
      * {@link AbstractTable#columnsCount(long)}.
      * 
-     * @param theKey
-     *        the row key
+     * @param theKey the row key
      * @return the number of columns */
     protected abstract long columnsCountInternal(final long theKey);
 
     /** The database specific implementation of {@lint
      * AbstractTable#columns(long)}
      * 
-     * @param theKey
-     *        the row key
+     * @param theKey the row key
      * @return the List of column Ids */
     @CheckForNull
     protected abstract LongArrayList columnsInternal(final long theKey);
@@ -118,8 +109,7 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
     /** The database specific implementation of
      * {@link AbstractTable#columnsIterator(long)}.
      * 
-     * @param theKey
-     *        the row key
+     * @param theKey the row key
      * @return Iterator of column Ids, returns null if row not found. */
     @CheckForNull
     protected abstract Iterator<LongHolder> columnsIteratorInternal(
@@ -127,10 +117,8 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
 
     /** The database specific implementation of {@link AbstractTable#get(long)}
      * 
-     * @param theKey
-     *        the row key
-     * @param theColumns
-     *        the list of column Ids
+     * @param theKey the row key
+     * @param theColumns the list of column Ids
      * @return the columns object containing column Ids and values, returns null
      *         if row not found */
     @CheckForNull
@@ -140,10 +128,8 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
     /** The database specific implementation of
      * {@link AbstractTable#get(long, Range)}
      * 
-     * @param theKey
-     *        the row key
-     * @param theColumns
-     *        the range of column Ids
+     * @param theKey the row key
+     * @param theColumns the range of column Ids
      * @return the internal */
     @CheckForNull
     protected abstract Columns getInternal(final long theKey,
@@ -161,32 +147,25 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
     /** The database specific implementation of
      * {@link AbstractTable#remove(long, LongArrayList)}
      * 
-     * @param theKey
-     *        the row key
-     * @param theRemoveCols
-     *        list of column ids to be removed. */
+     * @param theKey the row key
+     * @param theRemoveCols list of column ids to be removed. */
     protected abstract void removeInternal(final long theKey,
             final LongArrayList theRemoveCols);
 
     /** The database specific implementation of
      * {@link AbstractTable#remove(long, Range)}
      * 
-     * @param theKey
-     *        the row key
-     * @param theRemoveCols
-     *        the range of column Ids to be removed */
+     * @param theKey the row key
+     * @param theRemoveCols the range of column Ids to be removed */
     protected abstract void removeInternal(final long theKey,
             final Range theRemoveCols);
 
     /** The database specific implementation of
      * {@link AbstractTable#setInternal(long, Columns, LongArrayList)}
      * 
-     * @param theKey
-     *        the row key
-     * @param theInsertUpdateColumns
-     *        columns to be inserted or updated
-     * @param theRemoveCols
-     *        list of columns to be removed */
+     * @param theKey the row key
+     * @param theInsertUpdateColumns columns to be inserted or updated
+     * @param theRemoveCols list of columns to be removed */
     protected abstract void setInternal(final long theKey,
             final Columns theInsertUpdateColumns,
             final LongArrayList theRemoveCols);
@@ -194,12 +173,9 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
     /** The database specific implementation of
      * {@link AbstractTable#set(long, Columns, Range)}
      * 
-     * @param theKey
-     *        the row key
-     * @param theInsertUpdateColumns
-     *        columns to be inserted or updated.
-     * @param theRemoveCols
-     *        range of columns to be removed. */
+     * @param theKey the row key
+     * @param theInsertUpdateColumns columns to be inserted or updated.
+     * @param theRemoveCols range of columns to be removed. */
     protected abstract void setInternal(final long theKey,
             final Columns theInsertUpdateColumns, final Range theRemoveCols);
 
@@ -208,11 +184,8 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
      * @return the approximate number of rows in this table. */
     protected abstract long sizeInternal();
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#close()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#close() */
     @Override
     public final void close() {
         if (!closed) {
@@ -224,96 +197,69 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
         }
     }
 
-    /*
-     * (non-Javadoc) Assumes that columns are ordered unless specified
+    /* (non-Javadoc) Assumes that columns are ordered unless specified
      * otherwise. *
-     * 
-     * @see com.blockwithme.longdb.BETable#columnOrdering()
-     */
+     * @see com.blockwithme.longdb.BETable#columnOrdering() */
     @Override
     public boolean columnOrdering() {
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#columns(long)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#columns(long) */
     @Override
     public final LongArrayList columns(final long theKey) {
         open();
         return columnsInternal(theKey);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#columnsCount(long)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#columnsCount(long) */
     @Override
     public final long columnsCount(final long theKey) {
         open();
         return columnsCountInternal(theKey);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#columnsIterator(long)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#columnsIterator(long) */
     @Override
     public final Iterator<LongHolder> columnsIterator(final long theKey) {
         open();
         return columnsIteratorInternal(theKey);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#database()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#database() */
     @Override
     public final BEDatabase database() {
         return database;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#detectCollisions()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#detectCollisions() */
     @Override
     public final boolean detectCollisions() {
         return detectCollisions;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#exists(long)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#exists(long) */
     @Override
     public boolean exists(final long theKey) {
         return (columnsCount(theKey) > 0);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#get(long)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#get(long) */
     @Override
     @CheckForNull
     public final Columns get(final long theKey) {
         return get(theKey, FULL_RANGE);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#get(long, long)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#get(long, long) */
     @Override
     @CheckForNull
     public final Columns get(final long theKey, final long theCol) {
@@ -321,11 +267,8 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
         return get(theKey, one);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#get(long, long[])
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#get(long, long[]) */
     @Override
     @CheckForNull
     public final Columns get(final long theKey, final long... theColumns) {
@@ -341,12 +284,9 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see com.blockwithme.longdb.BETable#get(long,
-     * com.carrotsearch.hppc.LongArrayList)
-     */
+     * com.carrotsearch.hppc.LongArrayList) */
     @Override
     @CheckForNull
     public final Columns get(final long theKey, final LongArrayList theColumns) {
@@ -354,11 +294,9 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
         return getInternal(theKey, theColumns);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#get(long, com.blockwithme.longdb.Range)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#get(long,
+     * com.blockwithme.longdb.Range) */
     @Override
     @CheckForNull
     public final Columns get(final long theKey, final Range theColumns) {
@@ -366,11 +304,8 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
         return getInternal(theKey, theColumns);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#keys()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#keys() */
     @Override
     @Nonnull
     public final Iterator<LongHolder> keys() {
@@ -389,21 +324,15 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#remove(long)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#remove(long) */
     @Override
     public final void remove(final long theKey) {
         remove(theKey, FULL_RANGE);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#remove(long, long[])
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#remove(long, long[]) */
     @Override
     public final void remove(final long theKey, final long... theRemoveIds) {
         array.elementsCount = theRemoveIds.length;
@@ -416,12 +345,9 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see com.blockwithme.longdb.BETable#remove(long,
-     * com.carrotsearch.hppc.LongArrayList)
-     */
+     * com.carrotsearch.hppc.LongArrayList) */
     @Override
     public final void remove(final long theKey,
             final LongArrayList theRemoveCols) {
@@ -429,44 +355,34 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
         removeInternal(theKey, theRemoveCols);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#remove(long, com.blockwithme.longdb.Range)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#remove(long,
+     * com.blockwithme.longdb.Range) */
     @Override
     public final void remove(final long theKey, final Range theRemoveCols) {
         open();
         removeInternal(theKey, theRemoveCols);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#reverse()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#reverse() */
     @Override
     public final boolean reverse() {
         return reverse;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#set(long, com.blockwithme.longdb.Columns)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#set(long,
+     * com.blockwithme.longdb.Columns) */
     @Override
     public final void set(final long theKey,
             final Columns theInsertUpdateColumns) {
         set(theKey, theInsertUpdateColumns, EMPTY_RANGE);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#set(long, com.blockwithme.longdb.Columns,
-     * long[])
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#set(long,
+     * com.blockwithme.longdb.Columns, long[]) */
     @Override
     public final void set(final long theKey,
             final Columns theInsertUpdateColumns, final long... theRemoveIds) {
@@ -480,12 +396,9 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#set(long, com.blockwithme.longdb.Columns,
-     * com.carrotsearch.hppc.LongArrayList)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#set(long,
+     * com.blockwithme.longdb.Columns, com.carrotsearch.hppc.LongArrayList) */
     @Override
     public final void set(final long theKey,
             final Columns theInsertUpdateColumns,
@@ -494,12 +407,9 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
         setInternal(theKey, theInsertUpdateColumns, theRemoveCols);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#set(long, com.blockwithme.longdb.Columns,
-     * com.blockwithme.longdb.Range)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#set(long,
+     * com.blockwithme.longdb.Columns, com.blockwithme.longdb.Range) */
     @Override
     public final void set(final long theKey,
             final Columns theInsertUpdateColumns, final Range theRemoveCols) {
@@ -507,22 +417,16 @@ public abstract class AbstractTable<B extends AbstractBackend<B, D, T>, D extend
         setInternal(theKey, theInsertUpdateColumns, theRemoveCols);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#size()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#size() */
     @Override
     public final long size() {
         open();
         return sizeInternal();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#table()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#table() */
     @Override
     @Nonnull
     public final Base36 table() {

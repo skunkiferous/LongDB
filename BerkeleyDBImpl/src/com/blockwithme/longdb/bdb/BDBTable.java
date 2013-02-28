@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2013 Sebastien Diot
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -70,12 +70,10 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
 
     /** Instantiates a new bDB table.
      * 
-     * @param theDB
-     *        the database instance
-     * @param theDataName
-     *        the BDB database instance name
-     * @param isReverse
-     *        indicates whether columns should be sorted in reverse order */
+     * @param theDB the database instance
+     * @param theDataName the BDB database instance name
+     * @param isReverse indicates whether columns should be sorted in reverse
+     *        order */
     protected BDBTable(final BDBDatabase theDB, final String theDataName,
             final boolean isReverse) {
         super(theDB, Base36.get(theDataName), false, false);
@@ -89,10 +87,8 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
     /* Utility method */
     /** Abort close.
      * 
-     * @param theTransaction
-     *        the transaction object to be closed
-     * @param theCursor
-     *        the cur object to be closed. */
+     * @param theTransaction the transaction object to be closed
+     * @param theCursor the cur object to be closed. */
     private void abortClose(final Transaction theTransaction,
             final Cursor theCursor) {
         closeCursor(theCursor);
@@ -133,10 +129,8 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
 
     /** closes the cursor and commits the transaction.
      * 
-     * @param theTransaction
-     *        the transaction object
-     * @param theCursor
-     *        the cursor object */
+     * @param theTransaction the transaction object
+     * @param theCursor the cursor object */
     private void commitClose(final Transaction theTransaction,
             final Cursor theCursor) {
         closeCursor(theCursor);
@@ -196,15 +190,11 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
 
     /** Gets the next cursor value.
      * 
-     * @param theCursor
-     *        the cursor
-     * @param theKeyEntry
-     *        the key entry will get populated with next key.
-     * @param theDataEntry
-     *        the data entry will get populated with next entry.
-     * @param theDuplicate
-     *        if false skips all the duplicate values and goes to next
-     *        non-duplicate value
+     * @param theCursor the cursor
+     * @param theKeyEntry the key entry will get populated with next key.
+     * @param theDataEntry the data entry will get populated with next entry.
+     * @param theDuplicate if false skips all the duplicate values and goes to
+     *        next non-duplicate value
      * @return operation status */
     private OperationStatus getNext(final Cursor theCursor,
             final DatabaseEntry theKeyEntry, final DatabaseEntry theDataEntry,
@@ -233,8 +223,7 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
 
     /** creates a new cursor.
      * 
-     * @param theTransaction
-     *        the transaction object
+     * @param theTransaction the transaction object
      * @return the cursor */
     private Cursor newCursor(final Transaction theTransaction) {
         return dbInstance.openCursor(theTransaction, null);
@@ -254,12 +243,9 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
 
     /** Removes the in list.
      * 
-     * @param theKey
-     *        the key
-     * @param theRemoveCols
-     *        the remove
-     * @param theTransaction
-     *        the transaction object */
+     * @param theKey the key
+     * @param theRemoveCols the remove
+     * @param theTransaction the transaction object */
     private void removeInList(final long theKey,
             final LongArrayList theRemoveCols, final Transaction theTransaction) {
         final Cursor cur = newCursor(theTransaction);
@@ -279,12 +265,9 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
 
     /** Removes the entries in a range.
      * 
-     * @param theKey
-     *        the row key
-     * @param theRemoveCols
-     *        the remove
-     * @param theTransaction
-     *        the transaction object */
+     * @param theKey the row key
+     * @param theRemoveCols the remove
+     * @param theTransaction the transaction object */
     private void removeInRange(final long theKey, final Range theRemoveCols,
             final Transaction theTransaction) {
         final Cursor cur = newCursor(theTransaction);
@@ -314,12 +297,9 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
     /* Method for update/insert row-column combination */
     /** Sets the only.
      * 
-     * @param theKey
-     *        the key
-     * @param theInsertUpdateColumns
-     *        the insert or update
-     * @param theTransaction
-     *        the transaction object */
+     * @param theKey the key
+     * @param theInsertUpdateColumns the insert or update
+     * @param theTransaction the transaction object */
     private void setOnly(final long theKey,
             final Columns theInsertUpdateColumns,
             final Transaction theTransaction) {
@@ -366,11 +346,8 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractTable#closeInternal()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.base.AbstractTable#closeInternal() */
     @Override
     protected void closeInternal() {
         if (dbInstance != null) {
@@ -378,11 +355,8 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractTable#columnsCountInternal(long)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.base.AbstractTable#columnsCountInternal(long) */
     @Override
     protected long columnsCountInternal(final long theKey) {
         final long count = 0;
@@ -403,11 +377,8 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         return count;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractTable#columnsInternal(long)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.base.AbstractTable#columnsInternal(long) */
     @Override
     @CheckForNull
     protected LongArrayList columnsInternal(final long theKey) {
@@ -440,11 +411,9 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         return null;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractTable#columnsIteratorInternal(long)
-     */
+    /* (non-Javadoc)
+     * @see
+     * com.blockwithme.longdb.base.AbstractTable#columnsIteratorInternal(long) */
     @Override
     @CheckForNull
     protected Iterator<LongHolder> columnsIteratorInternal(final long theKey) {
@@ -457,21 +426,11 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
                 /** The real iterator. */
                 private final Iterator<LongCursor> iter = list.iterator();
 
-                /*
-                 * (non-Javadoc)
-                 * 
-                 * @see java.util.Iterator#hasNext()
-                 */
                 @Override
                 public boolean hasNext() {
                     return iter.hasNext();
                 }
 
-                /*
-                 * (non-Javadoc)
-                 * 
-                 * @see java.util.Iterator#next()
-                 */
                 @Override
                 public final LongHolder next() {
                     final LongCursor next = iter.next();
@@ -479,11 +438,6 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
                     return holder;
                 }
 
-                /*
-                 * (non-Javadoc)
-                 * 
-                 * @see java.util.Iterator#remove()
-                 */
                 @Override
                 public void remove() {
                     iter.remove();
@@ -492,12 +446,9 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         return null;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see com.blockwithme.longdb.base.AbstractTable#getInternal(long,
-     * com.carrotsearch.hppc.LongArrayList)
-     */
+     * com.carrotsearch.hppc.LongArrayList) */
     @Override
     @CheckForNull
     protected Columns getInternal(final long theKey,
@@ -542,12 +493,9 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         return new Columns(map, false);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see com.blockwithme.longdb.base.AbstractTable#getInternal(long,
-     * com.blockwithme.longdb.Range)
-     */
+     * com.blockwithme.longdb.Range) */
     @Override
     @CheckForNull
     protected Columns getInternal(final long theKey, final Range theRange) {
@@ -596,21 +544,15 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         return null;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractTable#keysInternal()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.base.AbstractTable#keysInternal() */
     @Override
     protected Iterator<LongHolder> keysInternal() {
         return new BDBKeyIterator(this);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractTable#openInternal()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.base.AbstractTable#openInternal() */
     @Override
     protected void openInternal() {
         dbInstance = database.env().openDatabase(null, this.dbName,
@@ -618,12 +560,9 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         closed = false;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see com.blockwithme.longdb.base.AbstractTable#removeInternal(long,
-     * com.carrotsearch.hppc.LongArrayList)
-     */
+     * com.carrotsearch.hppc.LongArrayList) */
     @Override
     protected void removeInternal(final long theKey,
             final LongArrayList theRemoveCols) {
@@ -641,12 +580,9 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see com.blockwithme.longdb.base.AbstractTable#removeInternal(long,
-     * com.blockwithme.longdb.Range)
-     */
+     * com.blockwithme.longdb.Range) */
     @Override
     protected void removeInternal(final long theKey, final Range theRemoveCols) {
         if (theRemoveCols.empty())
@@ -666,12 +602,9 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see com.blockwithme.longdb.base.AbstractTable#setInternal(long,
-     * com.blockwithme.longdb.Columns, com.carrotsearch.hppc.LongArrayList)
-     */
+     * com.blockwithme.longdb.Columns, com.carrotsearch.hppc.LongArrayList) */
     @Override
     protected void setInternal(final long theKey,
             final Columns theInsertUpdateColumns,
@@ -691,12 +624,9 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
+    /* (non-Javadoc)
      * @see com.blockwithme.longdb.base.AbstractTable#setInternal(long,
-     * com.blockwithme.longdb.Columns, com.blockwithme.longdb.Range)
-     */
+     * com.blockwithme.longdb.Columns, com.blockwithme.longdb.Range) */
     @Override
     protected void setInternal(final long theKey,
             final Columns theInsertUpdateColumns, final Range theRemoveCols) {
@@ -715,11 +645,8 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractTable#sizeInternal()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.base.AbstractTable#sizeInternal() */
     @Override
     protected long sizeInternal() {
         /** Iterates over keys to get number of rows. TODO: for better
@@ -750,11 +677,8 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#getLimited(long, int)
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#getLimited(long, int) */
     @Override
     @CheckForNull
     public Columns getLimited(final long theKey, final int theCount) {
@@ -799,11 +723,8 @@ public class BDBTable extends AbstractTable<BDBBackend, BDBDatabase, BDBTable> {
         return new Columns(map, false);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.BETable#reverseSupported()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.BETable#reverseSupported() */
     @Override
     public boolean reverseSupported() {
         return false;

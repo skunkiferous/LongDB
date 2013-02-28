@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2013 Sebastien Diot
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,14 +15,15 @@
  ******************************************************************************/
 package com.blockwithme.longdb.bdb;
 
-import java.util.Arrays;
+import static com.blockwithme.longdb.bdb.DataConversionUtil.toByta;
+import static com.blockwithme.longdb.bdb.DataConversionUtil.toLong;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.blockwithme.longdb.base.AbstractKeyIterator;
-import com.blockwithme.longdb.common.constants.ByteConstants;
 import com.carrotsearch.hppc.LongArrayList;
 import com.carrotsearch.hppc.cursors.LongCursor;
 import com.sleepycat.je.Cursor;
@@ -35,29 +36,18 @@ import com.sleepycat.je.OperationStatus;
 @ParametersAreNonnullByDefault
 public class BDBKeyIterator extends AbstractKeyIterator<BDBTable> {
 
-    /** Long.MIN_VALUE bytes */
-    private static final byte[] MIN_VALUE_BYTES = DataConversionUtil
-            .toByta(Long.MIN_VALUE);
-
     /** The table on which the keys are iterated. */
     private final BDBTable bdtab;
 
-    /** Last row-key until where the row ids are present in 'itr'. */
-    private Long currentKey;
-
-    /** Last row-key bytes until where the row ids are present in 'itr'. */
-    private byte[] currentKeyBytes;
+    /** Last row-key until where the row ids are present in 'itrerator'. */
+    private long currentKey = Long.MIN_VALUE;
 
     /** Iterator of cached row keys */
     private Iterator<LongCursor> itr;
 
-    /** The last key. */
-    private DatabaseEntry lastKey;
-
     /** Instantiates a new key iterator.
      * 
-     * @param theTable
-     *        the table on which key iterator is created */
+     * @param theTable the table on which key iterator is created */
     protected BDBKeyIterator(final BDBTable theTable) {
         super(theTable);
         bdtab = theTable;
@@ -81,22 +71,16 @@ public class BDBKeyIterator extends AbstractKeyIterator<BDBTable> {
             // Isn't that inefficient?
             cur = bdtab.dbInstance().openCursor(null, null);
             final DatabaseEntry ve = new DatabaseEntry();
-            OperationStatus s;
-            if (currentKey == null) {
-                currentKey = Long.MIN_VALUE;
-                currentKeyBytes = MIN_VALUE_BYTES;
-            }
-
-            lastKey = new DatabaseEntry(currentKeyBytes);
-            s = cur.getSearchKeyRange(lastKey, ve, backend().config()
-                    .lockMode());
-
             final LongArrayList buffer = new LongArrayList();
             int count = 0;
-            while (s == OperationStatus.SUCCESS
-                    && count < BDBConstants.ITERATOR_LIMIT) {
-                s = processNext(cur, ve, buffer);
-                count++;
+            while (count < BDBConstants.ITERATOR_LIMIT) {
+                if (processNext(cur, ve) == OperationStatus.SUCCESS) {
+                    buffer.add(currentKey);
+                    count++;
+                    currentKey++;
+                } else {
+                    break;
+                }
             }
 
             itr = buffer.iterator();
@@ -110,30 +94,18 @@ public class BDBKeyIterator extends AbstractKeyIterator<BDBTable> {
 
     /** Process next. */
     private OperationStatus processNext(final Cursor theCursor,
-            final DatabaseEntry theValueEntry, final LongArrayList theBuffer) {
+            final DatabaseEntry theValueEntry) {
 
-        final byte[] bytes = lastKey.getData();
-        if (bytes.length == ByteConstants.LONG_BYTES) {
-            currentKeyBytes = bytes;
-            currentKey = DataConversionUtil.toLong(bytes);
-            lastKey = new DatabaseEntry(bytes);
-        } else {
-            currentKeyBytes = Arrays.copyOfRange(bytes, 0,
-                    ByteConstants.LONG_BYTES);
-            currentKey = DataConversionUtil.toLong(currentKeyBytes);
-            lastKey = new DatabaseEntry(currentKeyBytes);
-        }
-        theBuffer.add(currentKey);
-        currentKey++;
-        return theCursor.getSearchKeyRange(lastKey, theValueEntry, backend()
-                .config().lockMode());
+        final DatabaseEntry key = new DatabaseEntry(toByta(currentKey));
+        final OperationStatus s = theCursor.getSearchKeyRange(key,
+                theValueEntry, backend().config().lockMode());
+        currentKey = toLong(key.getData());
+        return s;
+
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractKeyIterator#nextKey()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.base.AbstractKeyIterator#nextKey() */
     @Override
     protected long nextKey() {
         if (hasNext()) {
@@ -143,11 +115,8 @@ public class BDBKeyIterator extends AbstractKeyIterator<BDBTable> {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.blockwithme.longdb.base.AbstractKeyIterator#hasNext()
-     */
+    /* (non-Javadoc)
+     * @see com.blockwithme.longdb.base.AbstractKeyIterator#hasNext() */
     @Override
     public boolean hasNext() {
         return itr.hasNext() || getNext();
